@@ -49,6 +49,56 @@ Key = 4
 
 Return index `1`.
 
+### 🔹 Case 1: Key = 4 (Present)
+
+| Step | start | end | mid | numbers[mid] | Action                     |
+|------|-------|-----|-----|--------------|----------------------------|
+| 1    | 0     | 7   | 3   | 8            | 4 < 8 → search left side   |
+| 2    | 0     | 2   | 1   | 4            | ✅ Found at index 1        |
+
+---
+
+### 🔹 Case 2: Key = 10 (Present)
+
+| Step | start | end | mid | numbers[mid] | Action                     |
+|------|-------|-----|-----|--------------|----------------------------|
+| 1    | 0     | 7   | 3   | 8            | 10 > 8 → search right side |
+| 2    | 4     | 7   | 5   | 12           | 10 < 12 → left side        |
+| 3    | 4     | 4   | 4   | 10           | ✅ Found at index 4        |
+
+---
+
+### 🔹 Case 3: Key = 13 (Not Present)
+
+| Step | start | end | mid | numbers[mid] | Action                     |
+|------|-------|-----|-----|--------------|----------------------------|
+| 1    | 0     | 7   | 3   | 8            | 13 > 8 → right side        |
+| 2    | 4     | 7   | 5   | 12           | 13 > 12 → right side       |
+| 3    | 6     | 7   | 6   | 14           | 13 < 14 → left side        |
+| 4    | 6     | 5   |     |              | ❌ start > end → not found |
+
+---
+
+### 🔹 Case 4: Key = 2 (First element)
+
+| Step | start | end | mid | numbers[mid] | Action                     |
+|------|-------|-----|-----|--------------|----------------------------|
+| 1    | 0     | 7   | 3   | 8            | 2 < 8 → left side          |
+| 2    | 0     | 2   | 1   | 4            | 2 < 4 → left side          |
+| 3    | 0     | 0   | 0   | 2            | ✅ Found at index 0        |
+
+---
+
+### 🔹 Case 5: Key = 16 (Last element)
+
+| Step | start | end | mid | numbers[mid] | Action                     |
+|------|-------|-----|-----|--------------|----------------------------|
+| 1    | 0     | 7   | 3   | 8            | 16 > 8 → right side        |
+| 2    | 4     | 7   | 5   | 12           | 16 > 12 → right side       |
+| 3    | 6     | 7   | 6   | 14           | 16 > 14 → right side       |
+| 4    | 7     | 7   | 7   | 16           | ✅ Found at index 7        |
+
+---
 ---
 
 ## 💻 Java Code
