@@ -41,6 +41,34 @@ Day	Price	buyPrice	Profit	maxProfit
 4	6	1	5	5
 5	4	1	3	5
 
+buyPrice = ∞
+maxProfit = 0
+
+i = 0 → price = 7
+   buyPrice = min(∞, 7) = 7
+
+i = 1 → price = 1
+   buyPrice = min(7, 1) = 1
+
+i = 2 → price = 5
+   profit = 5 - 1 = 4
+   maxProfit = max(0, 4) = 4
+
+i = 3 → price = 3
+   profit = 3 - 1 = 2
+   maxProfit = max(4, 2) = 4
+
+i = 4 → price = 6
+   profit = 6 - 1 = 5
+   maxProfit = max(4, 5) = 5
+
+i = 5 → price = 4
+   profit = 4 - 1 = 3
+   maxProfit = max(5, 3) = 5
+
+🔚 Final maxProfit = 5
+
+
 🔚 Final Answer: 5
 
 📌 Notes
