@@ -32,6 +32,25 @@ You are given an array `prices[]` where `prices[i]` represents the stock price o
 
 ---
 
+🔁 Dry Run on [7,1,5,3,6,4]
+Day	Price	buyPrice	Profit	maxProfit
+0	7	7	-	0
+1	1	1	-	0
+2	5	1	4	4
+3	3	1	2	4
+4	6	1	5	5
+5	4	1	3	5
+
+🔚 Final Answer: 5
+
+📌 Notes
+Time Complexity: O(n)
+
+Space Complexity: O(1)
+
+Only one transaction allowed (1 buy and 1 sell).
+
+
 ## 💻 Java Code
 
 ```java
