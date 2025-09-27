@@ -1,11 +1,11 @@
 class Solution {
 
     //Q1. Move all zeroes to the end of the array
-    public void moveZeroes(int[] n ums)  {
+    public void moveZeroes(int[] nums)  {
         int i  = 0;   
         for (int j = 0; j < nums.length; j++) {
             if (nums[j]   != 0) {
-                int tem p  = nums[j];
+                int temp  = nums[j];
                 nums[j] = nums[i];
                 nums[i] = temp;
             }
