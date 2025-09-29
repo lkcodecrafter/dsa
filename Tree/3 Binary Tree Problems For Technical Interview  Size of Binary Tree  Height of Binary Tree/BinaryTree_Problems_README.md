@@ -144,3 +144,66 @@ int main() {
 - Implement all problems and test on different binary trees.
 - Try writing iterative solutions where possible.
 - Practice Level Order variants (like reverse level order, zigzag traversal).
+
+How stack is working
+
+🎯 Short Answer:
+
+Each recursive call returns its result to the function that called it.
+
+So:
+
+If countLeaves(4) returns 1, it returns to the function that called it — in this case, countLeaves(2).
+
+That function (countLeaves(2)) is waiting for both countLeaves(4) and countLeaves(5), so it adds their results, then returns the sum to its caller — which is countLeaves(1).
+
+The top-level caller (countLeaves(1)) finally gets the total count and returns it to main() or wherever you first called it.
+
+📦 Think of It Like a Package Delivery
+
+Imagine you're the boss and say:
+
+"Hey, how many leaves are in this tree?"
+
+You ask your assistant (countLeaves(1)), who then says:
+
+"Let me ask my left-hand (countLeaves(2)) and right-hand (countLeaves(3)) people."
+
+And then it keeps breaking it down, each assistant asking their own assistants, until they hit the bottom (leaf nodes), which give direct answers.
+
+Then each assistant adds up the answers from their team and passes the total back up the chain.
+
+🧱 Let's Trace a Mini Example
+
+Very simple tree:
+
+    1
+   / \
+  2   3
+
+
+Only leaf nodes: 2 and 3.
+
+Call: countLeaves(1)
+
+Stack and Return Path:
+countLeaves(1)
+├── calls countLeaves(2) → returns 1 (leaf)
+├── calls countLeaves(3) → returns 1 (leaf)
+returns 1 + 1 = 2
+
+
+So:
+
+countLeaves(2) → returns 1 → goes back to countLeaves(1)
+
+countLeaves(3) → returns 1 → goes back to countLeaves(1)
+
+countLeaves(1) now does 1 + 1 → returns 2 → goes to main()
+
+📌 So, "Who gets the return value?"
+
+➡️ The function that made the recursive call gets the return value.
+
+Then that function can use the return value (e.g., add it to something) and return a result to its caller.
+
