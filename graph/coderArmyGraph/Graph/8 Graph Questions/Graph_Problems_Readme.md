@@ -7,7 +7,7 @@ We’ll solve three main problems and list some homework questions for practice.
 ---
 
 ## 🔹 Problem 1: Covid Spread
-**Problem Link:** [Covid Spread - GFG](https://www.geeksforgeeks.org/problem...)  
+**Problem Link:** [Covid Spread - GFG](https://www.geeksforgeeks.org/problems/covid-spread--141631/1)  
 
 We are given a grid with infected and uninfected people. The virus spreads to adjacent cells in 1 unit of time.  
 We must calculate the **time taken for complete spread**.
