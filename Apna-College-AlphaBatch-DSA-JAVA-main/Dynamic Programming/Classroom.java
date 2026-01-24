@@ -1,5 +1,22 @@
 import java.util.*;
 
+// https://www.youtube.com/watch?v=1ZAotQGnbi4
+
+// Question: Find the Nth Catalan Number
+// What are Catalan Numbers?
+// The Catalan numbers are a sequence of natural numbers that occur in various counting problems, often involving recursively defined objects.
+// They are named after the Belgian mathematician Eugène Charles Catalan (1814–1894).
+// Exmaples of problems that can be solved using Catalan numbers include:
+// 1. Counting the number of correct ways to match parentheses.
+// 2. Counting the number of rooted binary trees with n+1 leaves.
+// 3. Counting the number of ways to triangulate a polygon with n+2 sides.
+// 4. Counting the number of paths along the edges of a grid that do not cross above the main diagonal.
+// 5. Counting the number of non-crossing partitions of a set.
+// Catalan Numbers: 1, 1, 2, 5, 14, 42, 132, 429, 1430, ...
+// Cn = Σ Ci * Cn-i-1 for i=0 to n-1
+// C0 = 1, C1 = 1
+// C2 = C0*C1 + C1*C0 = 1*1 + 1*1 = 2
+// C3 = C0*C2 + C1*C1 + C2*C0 =
 public class Classroom {
   public static int catalanRec(int n) {
     if (n == 0 || n == 1) {
@@ -55,6 +72,6 @@ public class Classroom {
     Arrays.fill(dp, -1);
     System.out.println(catalanMem(4, dp));
 
-    Syatem.out.println(catalanTab(5));
+    System.out.println(catalanTab(5));
   }
 }

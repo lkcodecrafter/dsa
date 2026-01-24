@@ -11,8 +11,8 @@ public class Question1{
         int b1 = sc.nextInt();
         float b2 = sc.nextInt();
 
-        
-
+        Complex complex = new Complex();
+        complex.diff(a1, b1);
         
     }
 }
@@ -30,7 +30,7 @@ class Complex{
         return pro;
     }
 
-    float diff{
-        
+    float diff(int a, int b){
+        return (float) a-b;
     }
 }

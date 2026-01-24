@@ -1,5 +1,7 @@
 import java.util.PriorityQueue;
 
+// https://leetcode.com/problems/k-closest-points-to-origin/description/
+
 public class PriorityQueues {
 
     public static void main(String args[]){
@@ -16,7 +18,7 @@ public class PriorityQueues {
          they come in accending order */
 
          while(!pq.isEmpty()){
-            System.out.print(pq.peek()+" ");
+            System.out.print(pq.peek()+" "); // output 1 3 4 7
             pq.remove();
          }
 

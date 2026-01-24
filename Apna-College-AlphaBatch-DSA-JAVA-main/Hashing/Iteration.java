@@ -28,3 +28,34 @@ public class Iteration{
         
     }
 }
+
+/*
+lkcodecrafter: Can you help me to understans this code and it's functions
+
+GitHub Copilot: Certainly! Here’s a breakdown of what the code in `Iteration.java` does:
+
+1. **Imports and Setup**:  
+   - Imports the `java.util.*` package for using collections like `HashMap` and `Set`.
+   - Defines a class `Iteration` with a `main` method.
+
+2. **HashMap Creation**:  
+   - Creates a `HashMap<String, Integer>` called `hm`.
+   - Adds four key-value pairs to the map: `"orange"`, `"banana"`, `"mango"`, and `"apple"` with integer values.
+
+3. **Printing the HashMap**:  
+   - Prints the entire `HashMap` object, which shows all key-value pairs.
+
+4. **Iterating Over Keys**:  
+   - Gets the set of keys from the map using `hm.keySet()`.
+   - Prints the set of keys.
+
+5. **Iterating and Printing Key-Value Pairs**:  
+   - Uses a for-each loop to go through each key in the set.
+   - For each key, prints the key and its corresponding value from the map.
+
+**Purpose**:  
+This code demonstrates how to store key-value pairs in a `HashMap`, retrieve all keys, and iterate over them to access and print both keys and their values.
+
+If you want a deeper explanation of any part, let me know!
+
+*/

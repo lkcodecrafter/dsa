@@ -2,7 +2,7 @@ import java.util.*;
 public class Majority_Element {
 
     public static void main(String args[]){
-        int arr[] = {1,3,2,5,1,3,1,5,1};
+        int arr[] = {1,3,2,5,1,3,1,5,1,3,3};
         int n = arr.length;
         HashMap<Integer,Integer>map = new HashMap<>();
         

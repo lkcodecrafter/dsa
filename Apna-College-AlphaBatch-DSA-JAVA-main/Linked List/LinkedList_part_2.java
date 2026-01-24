@@ -1,4 +1,3 @@
-import java.util.*;
 
 public class LinkedList_part_2{
 
@@ -24,7 +23,8 @@ public class LinkedList_part_2{
         Node newNode = new Node(data);
         size++;
         
-        if(head == null){
+        if(head == null)
+        {
             head = tail = newNode;
             tail.next = null;
             return;

@@ -14,7 +14,8 @@ public class Static {
         v3.setter("GH Raisoni");
         System.out.println(v3.getter());
 
-        
+        System.out.println();
+        System.out.println(new Vidyarthi().schoolName);
 
 
     }
