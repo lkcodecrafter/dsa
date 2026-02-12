@@ -15,11 +15,35 @@ public:
             char currentChar = s[right];
 
             // If the character has been seen and is within the current window
-            if (charIndex[currentChar] >= left) {
+            if (charIndex[currentChar] >= left) { // example: if currentChar is 'a' and charIndex['a'] = 0, and left = 0, then we have seen 'a' at index 0 which is within the current window [0, right]
+                // second example: if currentChar is 'b' and charIndex['b'] = 1, and left = 0, then we have seen 'b' at index 1 which is within the current window [0, right]
                 left = charIndex[currentChar] + 1; // Move left pointer
             }
 
-            charIndex[currentChar] = right; // Update the last seen index
+            charIndex[currentChar] = right; // Update the last seen index // example: if currentChar is 'a' and right = 3, then we update charIndex['a'] = 3
+            // not able to update charIndex['a'] = 3 if we have not moved left pointer because we have seen 'a' at index 0 which is within the current window [0, right], so we move left pointer to 1 and then update charIndex['a'] = 3
+            // example: if currentChar is 'b' and right = 4, then we update charIndex['b'] = 4
+            // give me charIndex full filled example:
+            // for input "abcabcbb"
+            //charIndex['a] = 0? means first time we see 'a' at index 0, then we update charIndex['a'] = 0
+            //charIndex['b'] = 1? means first time we see 'b' at index 1, then we update charIndex['b'] = 1
+            //charIndex['c'] = 2? means first time we see 'c' at index 2, then we update charIndex['c'] = 2
+            // then we see 'a' again at index 3, so we move left pointer to 1 and then we update charIndex['a'] = 3
+            // then we see 'b' again at index 4, so we move left pointer to 2 and then we update charIndex['b'] = 4
+            // then we see 'c' again at index 5, so we move left pointer to 3 and then we update charIndex['c'] = 5
+            // then we see 'b' again at index 6, so we move left pointer to 5 and then we update charIndex['b'] = 6
+            // then we see 'b' again at index 7, so we move left pointer to 7 and then we update charIndex['b'] = 7
+            // charIndex['a'] = 3
+            // charIndex['b'] = 4
+            // charIndex['c'] = 5
+            // for input "pwwkew"
+            // charIndex['p'] = 0
+            // charIndex['w'] = 2
+            // charIndex['k'] = 3
+            // for input "bbbbb"
+            // charIndex['b'] = 4
+    
+            // means we have seen 'a' at index 3 now, so we update the last seen index of 'a' to 3
             maxLength = max(maxLength, right - left + 1); // Update max length
         }
 

@@ -29,8 +29,8 @@ public:
             q.pop();
 
             for(auto d : dir){
-                int ni = i+ d[0];
-                int nj = j+ d[1];
+                int ni = i+ d[0]; // means ni = i + 0 or ni = i + 1 or ni = i - 1 depending on the direction
+                int nj = j+ d[1]; // means nj = j + 1 or nj = j - 1 or nj = j + 0 depending on the direction
 
                 if(ni >= 0 &&  ni < m &&  nj >=0 &&  nj < n && result[ni][nj] > result[i][j]+1){
                     result[ni][nj]=result[i][j]+1;

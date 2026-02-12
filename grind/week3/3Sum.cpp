@@ -2,7 +2,8 @@
 #include<vector>
 #include <algorithm>
 using namespace std;
-
+// leetcode 15. 3Sum
+// https://www.youtube.com/watch?v=QKq1qYjLZt
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
@@ -18,7 +19,8 @@ public:
 
             while (left < right) {
                 int sum = nums[i] + nums[left] + nums[right];
-
+                // why added sum == 0 condition here because we want to find triplets that sum to zero
+                // means example if nums[i] = -1, nums[left] = -1 and nums[right] = 2 then sum will be -1 + (-1) + 2 = 0 which is what we want
                 if (sum == 0) {
                     result.push_back({nums[i], nums[left], nums[right]});
 
