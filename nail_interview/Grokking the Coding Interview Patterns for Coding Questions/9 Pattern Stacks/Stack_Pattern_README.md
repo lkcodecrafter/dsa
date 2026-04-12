@@ -246,7 +246,7 @@ string simplifyPath(string path){
     string cur="";
     path += '/';
 
-    for(char c:path){
+    for(char c:path){ // path = "/a/./b/../../c/"
         if(c=='/'){
             if(cur==".." && !st.empty())
                 st.pop();
@@ -254,7 +254,7 @@ string simplifyPath(string path){
                 st.push(cur);
             cur="";
         } else {
-            cur+=c;
+            cur+=c; // cur = "a", then "b", then "..", then "..", then "c"
         }
     }
 

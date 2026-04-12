@@ -2,3 +2,6 @@ https://ffmpeg.org/ffmpeg.html
 
 deep learn - https://www.deeplearningbook.org/
 
+https://developer.android.com/media/camera/camera2
+
+https://source.android.com/docs/core/camera
