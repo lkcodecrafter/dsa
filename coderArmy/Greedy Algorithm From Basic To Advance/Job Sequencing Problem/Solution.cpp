@@ -11,13 +11,22 @@ Note: Each job takes a single unit of time, so the minimum possible deadline for
 Also, only one job can be scheduled at a time.
 Example 1:
 Input:  N = 4
-Jobs = {(1,4,20),(2,1,10),(3,1,40),(4,1,30)}
+Jobs = {
+	    (1,4,20),
+        (2,1,10),
+		(3,1,40),
+		(4,1,30)
+	   }
 Output: 2 60
 Explanation: 2 jobs can be done with
 maximum profit of 60 (20+40).
 Example 2:
 Input: N = 5    
-Jobs = {(1,2,100),(2,1,19),(3,2,27),(4,1,25),(5,1,15)}
+Jobs = {(1,2,100),
+        (2,1,19),
+		(3,2,27),
+		(4,1,25),
+		(5,1,15)}
 Output: 2 127
 Explanation: 2 jobs can be done with
 maximum profit of 127 (100+27).
@@ -74,4 +83,39 @@ class Solution {
  
  
     }
-}; 
+};
+
+
+
+//chatgpt solution.
+
+
+vector<int> jobSequencing(vector<int> &deadline, vector<int> &profit) {
+    int n = deadline.size();
+    vector<Job> jobs(n);
+    
+    for (int i = 0; i < n; i++) {
+        jobs[i] = {i + 1, deadline[i], profit[i]};
+    }
+
+    sort(jobs.begin(), jobs.end(), comp);
+
+    vector<int> result;
+    vector<bool> slot(n, false);
+
+    for (auto &[id, d, p] : jobs) {
+        for (int j = min(n, d) - 1; j >= 0; j--) {
+            if (!slot[j]) {
+                slot[j] = true;
+                result.push_back(p);
+                break;
+            }
+        }
+    }
+
+    // 👇 Convert your result vector into required format
+    int totalProfit = 0;
+    for (int p : result) totalProfit += p;
+
+    return { (int)result.size(), totalProfit };
+} 

@@ -38,16 +38,34 @@ int solve(int i, vector<int>& nums, vector<int>& dp) {
     if (i < 0) return 0;
     if (dp[i] != -1) return dp[i];
 
-    int rob = nums[i] + solve(i-2, nums, dp);
-    int skip = solve(i-1, nums, dp);
-
+    int rob = nums[i] + solve(i-2, nums, dp); 
+    /* why i-2? Because we cannot rob adjacent houses example: if we rob house i, we cannot rob house i-1, so we move to i-2 input {
+     "i": 4,
+     "nums": [2,7,9,3,1],
+     "dp": [-1, -1, -1, -1, -1]
+    }
+    output: 10
+    How we get 10?
+    - If we rob house 4 (1), we cannot rob house 3 (3), so we move to house 2 (9) and rob it. Total = 1 + 9 = 10
+    but index 1 (7) is greater than index 2 (9) so we skip house 4 and rob house 3 (3) and then we can rob house 1 (7) Total = 3 + 7 = 10
+    }
+    what is nums[i] + solve(i-2, nums, dp) means?
+    - nums[i] is the amount of money in the current house we are considering to rob
+    */
+    int skip = solve(i-1, nums, dp); // skip current house and move to previous house/ what is the value of i-1?
+    /* why i-1? Because if we skip current house, we can consider robbing the previous house. So we move to i-1 input {
+     "i": 4,
+     "nums": [2,7,9,3,1],
+     "dp": [-1, -1, -1, -1, -1]
+    }
+    */
     return dp[i] = max(rob, skip);
 }
 
 int robTD(vector<int>& nums) {
     int n = nums.size();
     vector<int> dp(n, -1);
-    return solve(n-1, nums, dp);
+    return solve(n-1, nums, dp); // why n-1? Because we start from the last house and move backwards to the first house. So we call solve with index n-1 which is the last house. Can we start from index 0? No, because we need to consider the option of robbing the last house and skipping the first house. If we start from index 0, we will not be able to consider that option. So we start from index n-1 and move backwards to index 0.
 }
 
 int main() {

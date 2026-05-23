@@ -13,7 +13,7 @@ public:
             indegree[p[0]]++;          // increase indegree of p[0] means p[0] has one more prerequisite
         }
         queue<int> q;
-        for (int i = 0; i < numCourses; i++) 
+        for (int i = 0; i < numCourses; i++)
             if (indegree[i] == 0) q.push(i);
         
         int count = 0;
@@ -21,7 +21,7 @@ public:
             int u = q.front(); q.pop();
             count++;
             for (auto v : adj[u]) {
-                if (--indegree[v] == 0) q.push(v);
+                if (--indegree[v] == 0) q.push(v); 
             }
         }
         return count == numCourses;

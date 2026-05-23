@@ -1,21 +1,30 @@
-#include<iostream>
-#include<vector>
-#include<algorithm>
+#include <iostream>
+#include <vector>
+#include <algorithm>
 using namespace std;
 
-class Solution {
+
+
+class Solution
+{
 public:
-    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+    vector<vector<int>> merge(vector<vector<int>> &intervals)
+    {
         vector<vector<int>> result;
-        if(intervals.size()==0){
+        if (intervals.size() == 0)
+        {
             return result;
         }
         sort(intervals.begin(), intervals.end());
         vector<int> temp = intervals[0];
-        for (int i = 1; i < intervals.size(); i++) {
-            if (intervals[i][0] <=temp[1]) {
+        for (int i = 1; i < intervals.size(); i++)
+        {
+            if (intervals[i][0] <= temp[1])
+            {
                 temp[1] = max(temp[1], intervals[i][1]);
-            } else {
+            }
+            else
+            {
                 result.push_back(temp);
                 temp = intervals[i];
             }
@@ -27,9 +36,10 @@ public:
 
 /*
 
-User: Can you help me to understand this code and dry run please add diagram or visualization so i can understand easily. also why taken min and max variable?
+User: Can you help me to understand this code and dry run please add diagram or visualization so i can understand easily.
+also why taken min and max variable?
 
-GitHub Copilot: I'll read the file and analyze it for you. 
+GitHub Copilot: I'll read the file and analyze it for you.
 
 Read [](file:///c%3A/Users/lalit.k/lalit/d/dsa/grind/week5/56.%20Merge%20Intervals.cpp)
 
@@ -52,7 +62,7 @@ This code merges overlapping intervals. Here's how it works:
 
 Actually, the code **only uses `max()`**, not both. Here's why:
 
-- **`max(intervals[i][1], temp[1])`** → When intervals overlap, we take the **maximum end value** 
+- **`max(intervals[i][1], temp[1])`** → When intervals overlap, we take the **maximum end value**
 to ensure we capture the entire merged range
 - We don't need `min` because after sorting, the **starting point is already the minimum**
 (the smaller start is in `temp[0]`)

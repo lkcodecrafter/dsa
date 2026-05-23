@@ -20,8 +20,11 @@ public:
             int v = edge[1];
             adj[u].push_back(v);
             adj[v].push_back(u);
-            indegree[u]++;
-            indegree[v]++;
+            indegree[u]++; // indegree of u is increased by 1
+            indegree[v]++; // indegree of v is increased by 1 // final indegree value now as {0, 2, 2, 1, 1}
+            // visualize the graph as 0--1--2--3 and 1--4, so indegree of 0 is 1, indegree of 1 is 2, indegree of 2 is 2, 
+            // indegree of 3 is 1 and indegree of 4 is 1
+            // visua of indegree is {1, 2, 2, 1, 1} how 
         }
 
         for (int i = 0; i < n; i++) {

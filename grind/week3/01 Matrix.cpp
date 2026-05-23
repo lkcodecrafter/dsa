@@ -6,7 +6,9 @@ using namespace std;
 
 // https://www.youtube.com/watch?v=XXaVIDIbUn4
 
-
+// what is below question about: 
+// Given a matrix mat of size m x n consisting of non-negative integers, return the distance of the nearest 0 for each cell.
+// leetcode link: https://leetcode.com/problems/01-matrix/
 class Solution {
 public:
 
@@ -234,4 +236,14 @@ From (1,2) → update (2,2) → distance 1
 From (0,1) → update (1,1) → distance 1
 
 
+| Direction | Meaning |
+| --------- | ------- |
+| `{0,1}`   | right   |
+| `{0,-1}`  | left    |
+| `{1,0}`   | down    |
+| `{-1,0}`  | up      |
+
+
 */
+
+

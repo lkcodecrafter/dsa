@@ -1,77 +1,91 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-
-class LRUCache {
+// leetcode 146. LRU Cache
+class LRUCache
+{
 public:
-    class Node {
-    public:
-        int val;
-        int key;
-        Node* next;
-        Node* prev;
+  class Node
+  {
+  public:
+    int val;
+    int key;
+    Node *next;
+    Node *prev;
 
-        Node(int k, int v) {
-            key = k;
-            val = v;
-        }
-    };
+    Node(int k, int v)
+    {
+      key = k;
+      val = v;
+    }
+  };
 
-    Node* head = new Node(-1, -1);
-    Node* tail = new Node(-1, -1);
-    int cap;
-    unordered_map<int, Node*> mp;
-    LRUCache(int capacity) {
-        cap = capacity;
-        head->next = tail;
-        tail->prev = head;
+  Node *head = new Node(-1, -1);
+  Node *tail = new Node(-1, -1);
+  int cap;
+  unordered_map<int, Node *> mp;
+  LRUCache(int capacity)
+  {
+    cap = capacity;
+    head->next = tail;
+    tail->prev = head;
+  }
+
+  void addNode(Node *node)
+  {
+    Node *temp = head->next;
+    node->next = temp;
+    node->prev = head;
+    head->next = node;
+    temp->prev = node; // visualize: head <-> node <-> temp (old head->next)
+                       // This makes node the new most-recently-used (MRU) and temp becomes the second MRU.
+                       // After this operation, the list order is: head <-> node <-> temp <-> ... <-> tail
+  }
+
+  void delNode(Node *node)
+  {
+    Node *delprev = node->prev; // visualize: delprev <-> node <-> delnext
+    Node *delnext = node->next;
+    delprev->next = delnext; // visualize: delprev <-> delnext (node is unlinked)
+    delnext->prev = delprev; // visualize: delprev <-> delnext (node is unlinked)
+    // we dont need to make node as nullptr because we will delete it after this, so it won't cause any issue
+  }
+
+  int get(int key)
+  {
+    if (mp.find(key) != mp.end())
+    {
+      Node *node = mp[key];
+      int res = node->val;
+      mp.erase(key);
+      delNode(node);
+      addNode(node);
+      mp[key] = head->next;
+      return res;
     }
 
-    void addNode(Node* node) {
-        Node* temp = head->next;
-        node->next = temp;
-        node->prev = head;
-        head->next = node;
-        temp->prev = node;
-    }
+    return -1;
+  }
 
-    void delNode(Node* node) {
-        Node* delprev = node->prev;
-        Node* delnext = node->next;
-        delprev->next = delnext;
-        delnext->prev = delprev;
+  void put(int key, int value)
+  {
+    if (mp.find(key) != mp.end())
+    {
+      Node *node = mp[key];
+      mp.erase(key);
+      delNode(node);
+      delete node;
     }
-
-    int get(int key) {
-        if (mp.find(key) != mp.end()) {
-            Node* node = mp[key];
-            int res = node->val;
-            mp.erase(key);
-            delNode(node);
-            addNode(node);
-            mp[key] = head->next;
-            return res;
-        }
-
-        return -1;
+    if (mp.size() == cap)
+    {
+      Node *node = tail->prev;
+      mp.erase(node->key);
+      delNode(node);
+      delete node;
     }
-
-    void put(int key, int value) {
-        if (mp.find(key) != mp.end()) {
-            Node* node = mp[key];
-            mp.erase(key);
-            delNode(node);
-            delete node;
-        }
-        if (mp.size() == cap) {
-            Node* node = tail->prev;
-            mp.erase(node->key);
-            delNode(node);
-            delete node;
-        }
-        addNode(new Node(key, value));
-        mp[key] = head->next;
-    }
+    addNode(new Node(key, value));
+    mp[key] = head->next;
+  }
 };
 
 /**
@@ -82,38 +96,38 @@ public:
  */
 
 // Driver code
-int main() {
-    // Create cache with capacity 2
-    LRUCache cache(2);
+int main()
+{
+  // Create cache with capacity 2
+  LRUCache cache(2);
 
-    // Put values in cache
-    cache.put(1, 1);
-    cache.put(2, 2);
+  // Put values in cache
+  cache.put(1, 1);
+  cache.put(2, 2);
 
-    // Get value for key 1
-    cout << cache.get(1) << endl; 
+  // Get value for key 1
+  cout << cache.get(1) << endl;
 
-    // Insert another key (evicts key 2)
-    cache.put(3, 3);
+  // Insert another key (evicts key 2)
+  cache.put(3, 3);
 
-    // Key 2 should be evicted
-    cout << cache.get(2) << endl; 
+  // Key 2 should be evicted
+  cout << cache.get(2) << endl;
 
-    // Insert another key (evicts key 1)
-    cache.put(4, 4);
+  // Insert another key (evicts key 1)
+  cache.put(4, 4);
 
-    // Key 1 should be evicted
-    cout << cache.get(1) << endl; 
+  // Key 1 should be evicted
+  cout << cache.get(1) << endl;
 
-    // Key 3 should be present
-    cout << cache.get(3) << endl; 
+  // Key 3 should be present
+  cout << cache.get(3) << endl;
 
-    // Key 4 should be present
-    cout << cache.get(4) << endl; 
+  // Key 4 should be present
+  cout << cache.get(4) << endl;
 
-    return 0;
+  return 0;
 }
-
 
 /*
 
@@ -127,11 +141,11 @@ Planned tasks created. Next I'll ask two quick questions about diagram style and
 
 Asked 2 questions (Diagram, Example)
 
-Great — using a Mermaid diagram and the default example sequence. 
+Great — using a Mermaid diagram and the default example sequence.
 
 Please paste the contents of `146. LRU Cache.cpp` (or confirm I should use a typical LRU Cache C++ implementation) so I can annotate, dry-run with the sequence, and produce the Mermaid visualization.
 
-User: @workspace /explain 
+User: @workspace /explain
 
 Workspace: This class implements an LRU (least-recently-used) cache using a doubly linked list for recency ordering and an unordered_map for O(1) key lookup. The inner Node class stores key, value and next/prev pointers. The LRUCache holds two dummy nodes (head and tail) so that the most-recently-used node is always right after head and the least-recently-used node is always right before tail. The constructor links those sentinels and stores the capacity.
 
@@ -149,24 +163,24 @@ Read [](file:///c%3A/Users/lalit.k/lalit/d/dsa/grind/week7/146.%20LRU%20Cache.cp
 
 Starting: *Annotate and explain the code* (2/5)
 
-Progress update — file loaded and TODOs updated; next I'll annotate the code, run a dry-run (capacity=2) and render a Mermaid diagram. 
+Progress update — file loaded and TODOs updated; next I'll annotate the code, run a dry-run (capacity=2) and render a Mermaid diagram.
 
 Below is a concise annotated walkthrough, a step-by-step dry run for the sequence you asked for, and a Mermaid diagram (rendered below) illustrating cache snapshots.
 
 **File:** `146. LRU Cache.cpp`
 
 - **Overview**: `LRUCache` uses a doubly-linked list (with dummy `head` and `tail`) to
- track recency and an `unordered_map<int, Node*>` for O(1) lookup. Most-recently-used (MRU) nodes are placed right after `head`. 
+ track recency and an `unordered_map<int, Node*>` for O(1) lookup. Most-recently-used (MRU) nodes are placed right after `head`.
  Least-recently-used (LRU) node is right before `tail`.
 
 - **Key methods**:
   - `addNode(Node* newNode)`: insert `newNode` immediately after `head` (makes it MRU).
   - `deleteNode(Node* delNode)`: unlink `delNode` by patching neighbors.
   - `get(int key_)`: if present, remove node, re-insert at front, return value; otherwise return -1.
-  - `put(int key_, int value)`: if key exists erase old node; if capacity reached evict `tail->prev`; 
+  - `put(int key_, int value)`: if key exists erase old node; if capacity reached evict `tail->prev`;
   insert new node at front and update map.
 
-- **Memory note**: nodes are created with `new` but never `delete` (evicted nodes are unlinked but not deallocated) — 
+- **Memory note**: nodes are created with `new` but never `delete` (evicted nodes are unlinked but not deallocated) —
 this leaks memory. Fix by `delete`-ing nodes when evicted or use smart pointers.
 
 Step-by-step dry run (capacity = 2) — operations: put(1,1), put(2,2), get(1), put(3,3), get(2), put(4,4), get(1), get(3), get(4)

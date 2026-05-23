@@ -44,7 +44,9 @@ public:
             q.pop();
 
             for(auto neighbor : curr->neighbour){
-                if(mp.find(neighbor) == mp.end()){ // if neighbor is not visited means not cloned
+                if(mp.find(neighbor) == mp.end()){ // if neighbor is not visited means not cloned / / find function returns end iterator if not found means not visited 
+                    // mp.find(neighbor) == mp.end() means value is not found.
+                    // mp.find(neighbor) != mp.end() means value is found.
                     mp[neighbor] = new Node(neighbor->val); // clone the neighbor
                     q.push(neighbor);
                 }
@@ -112,7 +114,7 @@ Let's trace through an example graph:
 ```
 Original Graph:
     1 ←→ 2
-    ↕   ↕
+    ↕    ↕
     4 ←→ 3
 ```
 
@@ -177,4 +179,15 @@ Final Cloned Graph:
 
 The algorithm ensures that each node is cloned exactly once and all edges are properly recreated in the cloned graph!
 
+
+Summary (remember this rule of thumb for interviews ⭐)
+Condition	Meaning	Action
+if (node == nullptr)	The graph is empty.	Return nullptr.
+while (!q.empty())	There are still nodes to process.	Continue processing the next node
+we use a queue to keep track of the nodes to be processed. We process each node, 
+create its clone if it hasn't been cloned yet, and enqueue its neighbors for further processing.
+We also maintain a hashmap to keep track of the original nodes and their corresponding clones, 
+ensuring that we don't create multiple clones for the same node and that 
+we can easily connect the cloned nodes together to form the cloned graph.
+One-line intuition (interview gold ⭐)
 */

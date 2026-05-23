@@ -10,7 +10,8 @@ class Solution {
 public:
     vector<vector<string>> accountsMerge(vector<vector<string>>& accounts) {
         unordered_map<string, vector<int>> emailToIndices;
-        for(int i = 0; i < accounts.size(); i++) {
+        for(int i = 0; i < accounts.size(); i++)
+        {
             for(int j = 1; j < accounts[i].size(); j++) {
                 emailToIndices[accounts[i][j]].push_back(i); // Map email to account indices, like {email: [index1, index2, ...]}
                 // This helps in finding all accounts that share the same email

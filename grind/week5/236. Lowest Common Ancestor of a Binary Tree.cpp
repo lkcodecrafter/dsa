@@ -24,7 +24,7 @@ public:
             return root; // this is lca
         }
 
-        return left ? left : right;
+        return left ? left : right; // means either left or right is non-null, return that (could be p or q or lca from below)
     }
 };
 

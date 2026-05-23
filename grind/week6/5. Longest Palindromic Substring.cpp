@@ -1,42 +1,61 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <cstring>
 using namespace std;
 
-class Solution {
+// https://www.youtube.com/watch?v=n_kL8BkURVA
+
+class Solution
+{
 public:
-    string longestPalindrome(string s) {
-        if (s.empty()) return "";
+    int t[1001][1001];
+    bool solve(string &s, int l, int r)
+    {
+        if (l >= r)
+            return 1;
 
-        int n = s.size();
-        string longest_palindrome = s.substr(0, 1);
-
-        // DP table: memo[i][j] = true if substring s[j...i] is palindrome
-        vector<vector<bool>> memo(n, vector<bool>(n, false));
-
-        // Every single character is a palindrome
-        for (int i = 0; i < n; i++) {
-            memo[i][i] = true;
+        if (t[l][r] != -1)
+        {
+            return t[l][r];
         }
 
-        // Expand substrings
-        for (int i = 0; i < n; i++) {
-            for (int j = i - 1; j >= 0; j--) {
-                if (s[i] == s[j]) {
-                    if (i == j + 1 || memo[i - 1][j + 1]) { // two chars or inner substring is palindrome
-                        memo[i][j] = true;
-                        if (i - j + 1 > (int)longest_palindrome.size()) {
-                            longest_palindrome = s.substr(j, i - j + 1); // update longest palindrome
-                        }
+        if (s[l] == s[r])
+        {
+            return t[l][r] = solve(s, l + 1, r - 1);
+        }
+
+        return t[l][r] = false;
+    }
+
+    string longestPalindrome(string s)
+    {
+        int n = s.length();
+
+        int maxlen = INT_MIN;
+        int startingIndex = 0;
+
+        memset(t, -1, sizeof(t));
+
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = i; j < n; j++)
+            {
+
+                if (solve(s, i, j))
+                {
+                    if (j - i + 1 > maxlen)
+                    {
+                        startingIndex = i;
+                        maxlen = j - i + 1;
                     }
                 }
             }
         }
 
-        return longest_palindrome;
+        return s.substr(startingIndex, maxlen);
     }
 };
-
 
 /*
 
@@ -82,7 +101,7 @@ Notice "bab" (memo[2][0] = True) and "aba" (memo[3][1] = True).
 
 User: Can you help me to understand this code and dry run please add diagram or visualization so i can understand easily?
 
-GitHub Copilot: I'll read the code and help you understand it with explanations and visualizations. 
+GitHub Copilot: I'll read the code and help you understand it with explanations and visualizations.
 
 Read [](file:///c%3A/Users/lalit.k/lalit/d/dsa/grind/week6/5.%20Longest%20Palindromic%20Substring.cpp)
 

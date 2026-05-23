@@ -25,7 +25,7 @@ public:
 
         for(int l = 1;l<n;l++){
             string temp = s.substr(idx, l);
-            if(st.find(temp)!=st.end() && solve(s, idx+l , n)){
+            if(st.find(temp)!=st.end() && solve(s, idx+l , n)){ // if temp is found in st and the remaining string can be segmented then we can say that the current string can also be segmented
                 return dp[idx]=true;
             }
             
@@ -41,3 +41,20 @@ public:
         return solve(s,0,n);
     }
 };
+
+// short dry run
+// s="leetcode", wordDict=["leet","code"]
+// st={"leet","code"}
+// solve("leetcode", 0, 8)
+// idx=0, n=8
+// temp="l", not found in st
+// temp="le", not found in st   
+// temp="lee", not found in st
+// temp="leet", found in st and solve("leetcode", 4, 8)
+// idx=4, n=8
+// temp="c", not found in st
+// temp="co", not found in st
+// temp="cod", not found in st  
+// temp="code", found in st and solve("leetcode", 8, 8)
+// idx=8, n=8, return true
+// return true for idx=4 and then return true for idx=0

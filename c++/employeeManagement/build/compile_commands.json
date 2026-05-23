@@ -1,0 +1,20 @@
+[
+{
+  "directory": "C:/Users/lalit.k/lalit/d/dsa/c++/employeeManagement/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe   -g -std=gnu++17 -o CMakeFiles\\employeeManagement.dir\\main.cpp.obj -c C:\\Users\\lalit.k\\lalit\\d\\dsa\\c++\\employeeManagement\\main.cpp",
+  "file": "C:/Users/lalit.k/lalit/d/dsa/c++/employeeManagement/main.cpp",
+  "output": "CMakeFiles/employeeManagement.dir/main.cpp.obj"
+},
+{
+  "directory": "C:/Users/lalit.k/lalit/d/dsa/c++/employeeManagement/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe   -g -std=gnu++17 -o CMakeFiles\\employeeManagement.dir\\EmployeeView.cpp.obj -c C:\\Users\\lalit.k\\lalit\\d\\dsa\\c++\\employeeManagement\\EmployeeView.cpp",
+  "file": "C:/Users/lalit.k/lalit/d/dsa/c++/employeeManagement/EmployeeView.cpp",
+  "output": "CMakeFiles/employeeManagement.dir/EmployeeView.cpp.obj"
+},
+{
+  "directory": "C:/Users/lalit.k/lalit/d/dsa/c++/employeeManagement/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe   -g -std=gnu++17 -o CMakeFiles\\employeeManagement.dir\\EmployeeViewModel.cpp.obj -c C:\\Users\\lalit.k\\lalit\\d\\dsa\\c++\\employeeManagement\\EmployeeViewModel.cpp",
+  "file": "C:/Users/lalit.k/lalit/d/dsa/c++/employeeManagement/EmployeeViewModel.cpp",
+  "output": "CMakeFiles/employeeManagement.dir/EmployeeViewModel.cpp.obj"
+}
+]

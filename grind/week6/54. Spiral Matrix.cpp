@@ -1,58 +1,67 @@
-#include<iostream>
-#include<vector>
+#include <iostream>
+#include <vector>
 using namespace std;
 
-class Solution {
+class Solution
+{
 public:
-    vector<int> spiralOrder(vector<vector<int>>& matrix) {
-        if(matrix.size() == 0)
+    vector<int> spiralOrder(vector<vector<int>> &matrix)
+    {
+        if (matrix.size() == 0)
             return {};
         int m = matrix.size();
         int n = matrix[0].size();
-        int dir=0;
-        //dir
-        //0   -> left  to right
-        //1   -> top   to down
-        //2   -> right to left
-        //3   -> down  to top
+        int dir = 0;
+        // dir
+        // 0   -> left  to right
+        // 1   -> top   to down
+        // 2   -> right to left
+        // 3   -> down  to top
         vector<int> result;
         int top = 0;
-        int down = m-1;
+        int down = m - 1;
         int left = 0;
-        int right = n-1;
-        while(top <=down && left <= right){
-            if(dir==0){
-                for(int i = left; i<=right;i++){
-                result.push_back(matrix[top][i]);
+        int right = n - 1;
+        while (top <= down && left <= right)
+        {
+            if (dir == 0)
+            {
+                for (int i = left; i <= right; i++)
+                {
+                    result.push_back(matrix[top][i]);
                 }
                 top++;
             }
-            if(dir==1)
+            if (dir == 1)
             {
-                for(int i = top;i<=down; i++){
-                result.push_back(matrix[i][right]);
+                for (int i = top; i <= down; i++)
+                {
+                    result.push_back(matrix[i][right]);
                 }
                 right--;
             }
-            if(dir==2)
+            if (dir == 2)
             {
-                for(int i= right;i>=left; i--){
-                result.push_back(matrix[down][i]); 
+                for (int i = right; i >= left; i--)
+                {
+                    result.push_back(matrix[down][i]);
                 }
                 down--;
             }
-            if(dir==3)
+            if (dir == 3)
             {
-                for(int i= down;i>=top;i--){
-                result.push_back(matrix[i][left]); // 
+                for (int i = down; i >= top; i--)
+                {
+                    result.push_back(matrix[i][left]); //
                 }
                 left++;
             }
-          
-          dir++;
-          if(dir==4){
-            dir=0;
-          }
+
+            dir++;
+            if (dir == 4)
+            {
+                dir = 0;
+            }
         }
         return result;
     }
@@ -74,7 +83,7 @@ This code traverses a 2D matrix in a **spiral pattern** (clockwise from outside 
 
 The algorithm uses **4 boundaries** to track which rows/columns have been visited:
 - `top`: top row boundary
-- `down`: bottom row boundary  
+- `down`: bottom row boundary
 - `left`: left column boundary
 - `right`: right column boundary
 
@@ -156,8 +165,13 @@ Now top > down, loop ends ✓
 | 2 | ← Right-Left | Traverse bottom row | down-- |
 | 3 | ↑ Bottom-Top | Traverse left column | left++ |
 
-**Time Complexity:** O(m × n) - visit each element once  
+**Time Complexity:** O(m × n) - visit each element once
 **Space Complexity:** O(1) - only boundaries, not counting output
 
 Would you like me to explain any specific part in more detail or help with edge cases?
+
+how to remember this approach?
+To remember this approach, you can think of the matrix as a series of layers or "rings" that you peel off one by one. 
+Each layer corresponds to a complete traversal in one of the four directions (right, down, left, up).
+
 */
