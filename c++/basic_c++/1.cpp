@@ -59,6 +59,28 @@ void EvenOrOddOrNaturalNumbers(int n) {
 // Even: 8
 // Odd: 9
 
+// But here is also printing as even odd numbers, so what is the use of mutex locks here?
+// The use of mutex locks in this function is to ensure that the output from multiple threads is not interleaved and remains organized.
+// If we have multiple threads calling this function simultaneously, without mutex locks, the output could be interleaved and difficult
+// to read, as different threads might print even and odd numbers at the same time.
+// By using mutex locks, we can ensure that when one thread is printing even numbers, another thread cannot print odd numbers at the same time, and vice versa.
+// This helps to maintain the integrity of the output and makes it easier to read, especially when multiple threads are involved.
+// In a real-world scenario, you would typically have more complex logic and shared resources that require synchronization,
+// and the use of mutex locks would be more evident in those cases.
+
+// But in my output it's also print as even :8 Odd: 9, so what is the use of mutex locks here?
+// The use of mutex locks in this function is to ensure that the output from multiple threads is
+// not interleaved and remains organized. If you are seeing output like "Even: 8 Odd: 9" without mutex locks, 
+// it means that the output from different threads is interleaved, 
+// which can happen when multiple threads are printing to the console at the same time.
+// By using mutex locks, you can ensure that when one thread is printing even numbers,
+// another thread cannot print odd numbers at the same time, and vice versa.
+// This helps to maintain the integrity of the output and makes it easier to read, especially when multiple threads are involved.
+// In a real-world scenario, you would typically have more complex logic and shared resources that require synchronization,
+// and the use of mutex locks would be more evident in those cases. In this simple example,
+// the use of mutex locks may not be necessary, but it serves as a demonstration of 
+// how to use mutex locks to control access to shared resources in a concurrent programming environment.
+
 // what is the diff between mutex locks and semaphores?
 // Mutex locks and semaphores are both synchronization primitives used to control access to shared resources in concurrent programming, but they have some key differences:
 // 1. Mutex Locks: A mutex (short for "mutual exclusion") is a locking mechanism that allows only one thread to access a resource at a time. It is typically used to protect critical sections of code that access shared resources. A mutex can be locked and unlocked by the same thread, and it provides exclusive access to the resource it protects.
@@ -72,10 +94,15 @@ int main(int argc, char const *argv[])
     EvenOrOddOrNaturalNumbers(5); // still not able to understand the use of mutex locks here, as we are not creating multiple threads to call this function.
     // To see the effect of mutex locks, we would need to create multiple threads that call this function simultaneously.
     // Example of creating multiple threads to call the EvenOrOddOrNaturalNumbers function:
+    cout<<"Creating multiple threads to call the EvenOrOddOrNaturalNumbers function simultaneously..."<<endl;
     thread t1(EvenOrOddOrNaturalNumbers, 10);
+    cout<<"Thread 1 created to call EvenOrOddOrNaturalNumbers function with n = 10"<<endl;
     thread t2(EvenOrOddOrNaturalNumbers, 10);
-    t1.join();
-    t2.join();
+    cout<<"Thread 2 created to call EvenOrOddOrNaturalNumbers function with n = 10"<<endl;
+    t1.join(); // Wait for thread t1 to finish
+    cout<<"Thread 1 has finished executing."<<endl; 
+    t2.join(); // Wait for thread t2 to finish
+    cout<<"Thread 2 has finished executing."<<endl;
     // In this example, we have two threads (t1 and t2) that are both calling the EvenOrOddOrNaturalNumbers function with n = 10.
     // The mutex locks will help ensure that the output from both threads is not interleaved and remains organized, as explained in the previous example.
     // Note: The output may still be interleaved if the threads are not properly synchronized, but the mutex locks will help reduce the chances of interleaving and ensure that the output is more organized.
@@ -87,10 +114,10 @@ int main(int argc, char const *argv[])
     // We have used 2 threads, still i'm not able to understand the use of mutex locks here, as we are not creating multiple threads to call this function.
     // To see the effect of mutex locks, we would need to create multiple threads that call this function simultaneously.
     // Example of creating multiple threads to call the EvenOrOddOrNaturalNumbers function:
-    thread t3(EvenOrOddOrNaturalNumbers, 10);
-    thread t4(EvenOrOddOrNaturalNumbers, 10);
-    t3.join();
-    t4.join();
+   // thread t3(EvenOrOddOrNaturalNumbers, 10);
+   // thread t4(EvenOrOddOrNaturalNumbers, 10);
+   // t3.join();
+   // t4.join();
     return 0;
 }
 // please visualize the output of this code when we have multiple threads calling the EvenOrOddOrNaturalNumbers function simultaneously, and how mutex locks will help in that case.
