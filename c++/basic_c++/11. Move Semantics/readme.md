@@ -9,3 +9,6 @@ Ownership transferred.
 No copy.
 
 Faster.
+
+Move semantics allow resources to be transferred from temporary objects instead of copying them. This improves performance, especially for objects that manage dynamic memory.
+

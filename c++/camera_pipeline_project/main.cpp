@@ -8,25 +8,21 @@ using namespace std;
 
 int main() {
 
-    BufferQueue queue;
+  BufferQueue queue;
 
-    CameraHAL hal(&queue);
+  CameraHAL hal(&queue);
 
-    CameraService service(&queue);
+  CameraService service(&queue);
 
-    thread halThread(
-        &CameraHAL::captureFrames,
-        &hal);
+  thread halThread(&CameraHAL::captureFrames, &hal);
 
-    thread serviceThread(
-        &CameraService::processFrames,
-        &service);
+  thread serviceThread(&CameraService::processFrames, &service);
 
-    halThread.join();
+  halThread.join();
 
-    serviceThread.join();
+  serviceThread.join();
 
-    cout << "\n===== Camera Pipeline Finished =====\n";
+  cout << "\n===== Camera Pipeline Finished =====\n";
 
-    return 0;
+  return 0;
 }

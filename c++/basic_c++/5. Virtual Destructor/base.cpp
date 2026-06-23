@@ -4,6 +4,11 @@ using namespace std;
 class Base{
 
     public:
+
+    Base(){
+        cout<<"Base constructor called"<<endl;
+    }
+
     virtual ~Base(){
         cout<<"Base destructor called"<<endl;
     }
@@ -12,6 +17,11 @@ class Base{
 class Derived : public Base {
 
     public:
+
+    Derived(){
+        cout<<"Derived constructor called"<<endl;
+    }
+
     ~Derived() {
         cout<<"Derived destructor called"<<endl;
     }

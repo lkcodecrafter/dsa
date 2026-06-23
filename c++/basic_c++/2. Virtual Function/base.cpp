@@ -23,6 +23,10 @@ int main(){
     
 Base* bs = new Derived();
 bs->show();
+
+
+//Derived* dr = new Base(); // compile time error: cannot convert ‘Base*’ to ‘Derived*’ in initialization. why? Because Base is not a subclass of Derived.
+//dr->show();
 }
 
 /*

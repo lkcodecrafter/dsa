@@ -29,6 +29,19 @@ void EvenOrOddOrNaturalNumbers(int n) {
     }
 }
 
+/*
+// By using mutex locks, you can ensure that when one thread is printing even numbers,
+// another thread cannot print odd numbers at the same time, and vice versa.
+// In this specific code, the mutexes l1 and l2 are used to synchronize access to the standard output (cout).
+// Without these locks, if two threads try to write to 'cout' at the exact same time, the characters 
+// could get mixed up (e.g., "EvOdden: : 01"). 
+// By locking l1 before printing "Even" and l2 before printing "Odd", we ensure that the 
+// entire string is printed to the console as a single, atomic operation.
+
+
+*/
+
+
 // Why we used mutex locks here?
 // In this function, we are printing even and odd numbers. 
 // If we have multiple threads calling this function, there could be a race condition where two threads might 
@@ -118,6 +131,25 @@ int main(int argc, char const *argv[])
    // thread t4(EvenOrOddOrNaturalNumbers, 10);
    // t3.join();
    // t4.join();
+
+
+   //Syntax of thread 
+   /*
+   std::thread thread_object(callable_entity, arg1, arg2, ...);
+   
+   - thread_object: The name of the thread object.
+   - callable_entity: A function pointer, lambda expression, or function object.
+   - arg1, arg2, ...: Arguments to be passed to the callable entity.
+   */
+
+   // Example:
+   // thread t(function_name, argument);
+   // t.join(); // Wait for thread to finish
+   // t.detach(); // Allow thread to run independently and 
+   // not wait for it to finish.
+   
+   
+
     return 0;
 }
 // please visualize the output of this code when we have multiple threads calling the EvenOrOddOrNaturalNumbers function simultaneously, and how mutex locks will help in that case.

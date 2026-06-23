@@ -16,7 +16,7 @@ pthread_mutex_t mutex;
 pthread_mutex_lock(&mutext);
 
 //critical section
-ptread_mutex_unlock(&mutex);
+pthread_mutex_unlock(&mutex);
 
 Why Mutex Needed?
 

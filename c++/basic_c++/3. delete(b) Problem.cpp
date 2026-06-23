@@ -35,9 +35,7 @@ int main() {
  B* b = new B();
  delete(b);
  b=NULL;
-
-
-    return 0;
+return 0;
 }
 
 /*
@@ -98,7 +96,7 @@ Rules:
 
 Allocation	Deallocation
 malloc()	free()
-new	delete
+new	        delete
 
 Never mix.
 
@@ -122,4 +120,9 @@ Correct:
 delete b;
 b = NULL;
 
+
+malloc example: 
+B* b = (B*)malloc(sizeof(B));
+free(b);
+b= NULL;
 */

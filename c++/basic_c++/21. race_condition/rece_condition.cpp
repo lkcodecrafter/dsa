@@ -59,6 +59,24 @@ int main(){
     return 0;
 }
 
+// Diff bewtween mutex and atomic 
+/*
+Difference between Mutex and Atomic:
+
+1. Mutex (std::mutex):
+   - A locking mechanism that provides mutual exclusion.
+   - Can protect multiple lines of code or complex data structures.
+   - Higher overhead because it involves OS-level context switching if a thread has to wait.
+   - Prevents any other thread from entering the "critical section".
+
+2. Atomic (std::atomic):
+   - A lock-free synchronization primitive for single variables (int, bool, etc.).
+   - Performs operations (like increment, decrement, exchange) as a single, indivisible step at the CPU level.
+   - Much faster than mutexes for simple operations because it doesn't put threads to sleep.
+   - Only works for individual variables, not for protecting complex logic or multiple statements.
+
+Summary: Use Atomic for simple counters/flags; use Mutex for complex logic or protecting multiple shared resources.
+*/
 
 
 /*

@@ -71,8 +71,11 @@ int* const ptr;
 Pointer fixed.
 Data changes.
 
+
+
+----
 Data Constant
-const int* ptr;
+const int* ptr; 
 
 Data fixed.
 Pointer changes.
