@@ -25,16 +25,22 @@ Code is **minimal**, **clear**, and **interview‑friendly**.
 using namespace std;
 
 class Singleton {
-    static Singleton* instance;
-    Singleton() {}
+    static Singleton* instance; // Declaration (tells the compiler it exists)
+    Singleton() {} // is it private? yes. but not defined private keyword?  why? 
+    // in java it is private. in cpp we can skip private keyword. 
+    // if i remove private keyword in cpp, it will still be private. 
+    // this is because in cpp, the default access specifier for class members is private. 
+    // if i define constructor as private, then it will be private. 
+    // but if i don't define private keyword, then it will still be private. 
 public:
     static Singleton* getInstance() {
-        if(!instance) instance = new Singleton();
+        if(!instance) instance = new Singleton(); // Equivalent to: if (instance == nullptr)
+        // Created ONLY the first time
         return instance;
     }
     void show() { cout << "Singleton\n"; }
 };
-Singleton* Singleton::instance = nullptr;
+Singleton* Singleton::instance = nullptr; // Definition (allocates memory and initializes it)
 
 int main() {
     Singleton::getInstance()->show();
@@ -68,14 +74,22 @@ class Singleton {
 #include <iostream>
 using namespace std;
 
-class Shape { public: virtual void draw()=0; };
+class Shape {
+    // abstract base class
+    public: 
+        virtual void draw()=0; // pure virtual functio  n
+};
 class Circle : public Shape {
-public: void draw(){ cout<<"Circle\n"; }
+public: 
+    void draw(){ cout<<"Circle\n"; }
 };
 
 int main(){
-    Shape* s = new Circle();
-    s->draw();
+    Shape* s = new Circle(); // why Shape*? not Circle*? Explain this 
+    // because Circle is derived from Shape. so we can point to the Shape part of the Circle object. 
+    // but if we point to the Circle part of the Shape object, then we cannot access the virtual functions.  // is it true? yes 
+    s->draw(); // why ->? not .? Explain this 
+    // because s is a pointer. so we use -> to access the member functions. if s was not a pointer, then we would use . to access the member functions.
 }
 ```
 
@@ -91,12 +105,17 @@ public class Main {
         s.draw();
     }
 }
+
+// Output
+// Circle
 ```
 
 ---
 
 ## 3. Abstract Factory
 **Intent:** Create families of objects.
+
+How we are creating families of objects? 
 
 ### C++
 ```cpp
@@ -149,6 +168,98 @@ int main(){
     h.roof="Concrete";
     cout<<h.walls<<" "<<h.roof<<endl;
 }
+
+// One more example - 
+
+#include <iostream>
+#include <string>
+
+class GamingPC {
+private:
+    // const members make the object immutable after creation (like Java's 'final')
+    const std::string cpu;
+    const std::string ram;
+    const std::string graphicsCard;
+    const bool hasRgb;
+
+public:
+    // Forward declare the Builder class so GamingPC knows it exists
+    class Builder;
+
+private:
+    // Private constructor: accepts a Builder reference and uses an initializer list
+    GamingPC(const Builder& builder);
+
+public:
+    void showSpecs() const {
+        std::cout << "PC Specs -> CPU: " << cpu 
+                  << " | RAM: " << ram 
+                  << " | GPU: " << graphicsCard 
+                  << " | RGB: " << (hasRgb ? "true" : "false") << std::endl;
+    }
+
+    // Nested Builder Class
+    class Builder {
+    private:
+        std::string cpu;
+        std::string ram;
+        std::string graphicsCard = "Integrated Graphics"; // Default value
+        bool hasRgb = false;                              // Default value
+
+        // Allow GamingPC private constructor to read these private fields
+        friend class GamingPC;
+
+    public:
+        // Constructor forces user to provide mandatory fields
+        Builder(const std::string& cpu, const std::string& ram) 
+            : cpu(cpu), ram(ram) {}
+
+        // Methods return a reference to 'this' to allow fluent method chaining
+        Builder& addGraphicsCard(const std::string& graphicsCard) {
+            this->graphicsCard = graphicsCard;
+            return *this;
+        }
+
+        Builder& addRgb(bool hasRgb) {
+            this->hasRgb = hasRgb;
+            return *this;
+        }
+
+        // The final method that creates the actual GamingPC object
+        GamingPC build() const {
+            return GamingPC(*this);
+        }
+    };
+};
+
+// Definition of GamingPC constructor (must be defined after Builder class is fully declared)
+GamingPC::GamingPC(const GamingPC::Builder& builder)
+    : cpu(builder.cpu), 
+      ram(builder.ram), 
+      graphicsCard(builder.graphicsCard), 
+      hasRgb(builder.hasRgb) {}
+
+
+// Client Code / Main Function
+int main() {
+    // Build a high-end PC
+    GamingPC highEndPc = GamingPC::Builder("AMD Ryzen 9", "64GB")
+                            .addGraphicsCard("RTX 4080")
+                            .addRgb(true)
+                            .build();
+
+    // Build a budget office PC using default values
+    GamingPC officePc = GamingPC::Builder("Intel i3", "8GB")
+                            .build();
+
+    highEndPc.showSpecs();
+    officePc.showSpecs();
+
+    return 0;
+}
+
+
+
 ```
 
 ### Java
@@ -163,6 +274,78 @@ public class Main {
         System.out.println(h.walls+" "+h.roof);
     }
 }
+
+// One more Exaple 
+
+class GamingPC {
+    // All fields are final (immutable after creation)
+    private final String cpu;
+    private final String ram;
+    private final String graphicsCard;
+    private final boolean hasRgb;
+
+    // The main constructor is private; only the Builder can call it
+    private GamingPC(Builder builder) {
+        this.cpu = builder.cpu;
+        this.ram = builder.ram;
+        this.graphicsCard = builder.graphicsCard;
+        this.hasRgb = builder.hasRgb;
+    }
+
+    public void showSpecs() {
+        System.out.println("PC Specs -> CPU: " + cpu + " | RAM: " + ram + 
+                           " | GPU: " + graphicsCard + " | RGB: " + hasRgb);
+    }
+
+    // Static Inner Builder Class
+    public static class Builder {
+        private String cpu;         // Required
+        private String ram;         // Required
+        private String graphicsCard = "Integrated Graphics"; // Default value
+        private boolean hasRgb = false;                     // Default value
+
+        // Constructor forces user to provide mandatory fields
+        public Builder(String cpu, String ram) {
+            this.cpu = cpu;
+            this.ram = ram;
+        }
+
+        // Methods return 'this' (the builder instance) to allow method chaining
+        public Builder addGraphicsCard(String graphicsCard) {
+            this.graphicsCard = graphicsCard;
+            return this; 
+        }
+
+        public Builder addRgb(boolean hasRgb) {
+            this.hasRgb = hasRgb;
+            return this;
+        }
+
+        // The final method that creates the actual GamingPC object
+        public GamingPC build() {
+            return new GamingPC(this);
+        }
+    }
+}
+
+// Client Code / Main Method
+public class Main {
+    public static void main(String[] args) {
+        // Build a high-end PC
+        GamingPC highEndPc = new GamingPC.Builder("AMD Ryzen 9", "64GB")
+                .addGraphicsCard("RTX 4080")
+                .addRgb(true)
+                .build();
+
+        // Build a budget office PC using default values
+        GamingPC officePc = new GamingPC.Builder("Intel i3", "8GB")
+                .build();
+
+        highEndPc.showSpecs();
+        officePc.showSpecs();
+    }
+}
+
 ```
 
 ---
@@ -205,10 +388,10 @@ class Prototype implements Cloneable {
 ```
 
 ---
-# 🧱 STRUCTURAL PATTERNS (7)
+# 🧱 STRUCTURAL PATTERNS (7) // Strucutre patter is using composition of objects. 
 
 ## 6. Adapter
-**Intent:** Convert one interface to another.
+**Intent:** Convert one interface to another.  converting one interface into another so they can work together without changing either original device.
 
 ### C++
 ```cpp
@@ -247,6 +430,21 @@ public class Main {
         new Adapter(new Old()).request();
     }
 }
+
+// Output 
+// Old Request
+// Why to us this pattern?
+// Scenario:
+// You have an old system (Old) that works fine. Now, you want to integrate it with a new system (New) that expects a different interface. Instead of rewriting the old system, you create an Adapter to translate calls between the two.
+// But we can modify old system to match the new interface.
+// Use case: Use when you want to use existing class (with incompatible interface) in your project.
+
+// Adapter Design Pattern in Real World:
+// Imagine you have an Android app and you want to integrate a payment SDK from a company that provides it only for iOS. You can't change the SDK code. So, you write an Adapter class that implements the iOS interface but uses the Android SDK internally to make the payment. This way, your app works seamlessly with the SDK.
+
+
+
+
 ```
 
 ---

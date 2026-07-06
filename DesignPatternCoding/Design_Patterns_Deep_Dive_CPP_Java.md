@@ -129,6 +129,13 @@ public:
         return new Circle();
     }
 };
+
+int main(){
+  ShapeFactory::create()->draw();  
+}
+
+// output 
+// Circle
 ```
 
 ---

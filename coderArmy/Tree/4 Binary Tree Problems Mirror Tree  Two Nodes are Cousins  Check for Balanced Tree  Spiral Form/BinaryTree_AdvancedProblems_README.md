@@ -77,6 +77,75 @@ bool isBalanced(Node* root) {
     return checkHeight(root) != -1;
 }
 
+
+// How to check tree balance can you dry run above program? 
+// 1. if(root==NULL) return 0;
+// 2. lh = checkHeight(root->left)
+// 3. if(lh==-1) return -1;
+// 4. rh = checkHeight(root->right)
+// 5. if(rh==-1) return -1;
+// 6. if(abs(lh-rh)>1) return -1;
+// 7. return max(lh,rh)+1;
+
+Dry run above code for better understanding
+-> Take example of complete tree:
+    1
+   / \ 
+  2   3 
+ / \ 
+4   5
+
+-> for root 1
+-> lh = checkHeight(1->left) = checkHeight(2)
+    -> lh = checkHeight(2->left) = checkHeight(4)
+        -> lh = checkHeight(4->left) = checkHeight(NULL) = 0
+        -> rh = checkHeight(4->right) = checkHeight(NULL) = 0
+        -> abs(lh-rh) = 0 <= 1 return max(0,0)+1 = 1
+    -> rh = checkHeight(2->right) = checkHeight(5)
+        -> lh = checkHeight(5->left) = checkHeight(NULL) = 0
+        -> rh = checkHeight(5->right) = checkHeight(NULL) = 0
+        -> abs(lh-rh) = 0 <= 1 return max(0,0)+1 = 1
+    -> abs(lh-rh) = abs(1-1) = 0 <= 1 return max(1,1)+1 = 2
+-> rh = checkHeight(1->right) = checkHeight(3)
+    -> lh = checkHeight(3->left) = checkHeight(NULL) = 0
+    -> rh = checkHeight(3->right) = checkHeight(NULL) = 0
+    -> abs(lh-rh) = 0 <= 1 return max(0,0)+1 = 1
+-> abs(lh-rh) = abs(2-1) = 1 <= 1 return max(2,1)+1 = 3
+-> isBalanced(root) = 3 != -1 return true
+
+-> Take example of skewed tree:
+    1
+     \
+      2
+       \
+        3
+         \
+          4
+           \
+            5
+
+-> for root 1
+-> lh = checkHeight(1->left) = checkHeight(NULL) = 0
+-> rh = checkHeight(1->right) = checkHeight(2)
+    -> lh = checkHeight(2->left) = checkHeight(NULL) = 0
+    -> rh = checkHeight(2->right) = checkHeight(3)
+        -> lh = checkHeight(3->left) = checkHeight(NULL) = 0
+        -> rh = checkHeight(3->right) = checkHeight(4)
+            -> lh = checkHeight(4->left) = checkHeight(NULL) = 0
+            -> rh = checkHeight(4->right) = checkHeight(5)
+                -> lh = checkHeight(5->left) = checkHeight(NULL) = 0
+                -> rh = checkHeight(5->right) = checkHeight(NULL) = 0
+                -> abs(lh-rh) = 0 <= 1 return max(0,0)+1 = 1
+            -> abs(lh-rh) = abs(0-1) = 1 <= 1 return max(0,1)+1 = 2
+        -> abs(lh-rh) = abs(0-2) = 2 > 1 return -1
+    -> abs(lh-rh) = abs(0-(-1)) = 1 <= 1 return max(0,-1)+1 = 1
+-> abs(lh-rh) = abs(0-1) = 1 <= 1 return max(0,1)+1 = 2
+-> isBalanced(root) = 2 != -1 return true
+
+
+where is this condition is present 
+abs(lh-rh) = 0 <= 1 
+
 // Problem 4: Level Order Traversal in Spiral Form
 void spiralOrder(Node* root) {
     if (root == NULL) return;
@@ -86,7 +155,8 @@ void spiralOrder(Node* root) {
     while (!q.empty()) {
         int n = q.size();
         vector<int> level(n);
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++)
+        {
             Node* curr = q.front();
             q.pop();
             int index = leftToRight ? i : (n - i - 1);

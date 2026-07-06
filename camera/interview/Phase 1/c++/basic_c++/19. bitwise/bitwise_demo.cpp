@@ -51,17 +51,25 @@ int main() {
 
   // Clear the 2nd bit
   CLEAR_BIT(num, 2); // num becomes 3 (0011)
-  // Dry run
-  // num = 5 (0101)
-  // num = 5(0101)
-  //  0100
-  //  0101
-  // ------
-  //  0101
-  //
+  /* Dry run
+
+Original n : 101
+Bit to clear (pos=2)
+            ↑
+
+Mask       : 011
+Result     : 001
+
+So CLEAR_BIT(n, 2) changes 101 to 001 by clearing bit position 2.
+
+  */
 
   // Toggle the 0th bit
-  TOGGLE_BIT(num, 0); // num becomes 2 (0010)
+  TOGGLE_BIT(num, 0); // output is 1 ??
+  // num = 3 (0011)
+  // 1 << 0 = 1 (0001)
+  // num ^ (1 << 0) = 3 ^ 1 = 2 (0010)
+  // output is 2
 
   // Get the 1st bit
   bool bit = GET_BIT(num, 1); // bit will be 1

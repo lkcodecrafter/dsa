@@ -1,0 +1,54 @@
+interface Burger {
+
+    public void order();
+}
+
+class VeggiBurger implements Burger {
+    @Override
+    public void order() {
+        System.out.println("Veggie Burger");
+    }
+}
+
+class ChickenBurger implements Burger {
+    @Override
+    public void order() {
+        System.out.println("Chicken Burger");
+    }
+}
+
+abstract class Restaurant {
+    public abstract Burger createBurger();
+
+    public Burger prepare() {
+        System.out.println("Preparing the burger");
+        Burger burger = createBurger();
+        burger.order();
+        return burger;
+    }
+}
+
+class VeggieRestaurant extends Restaurant {
+
+    @Override
+    public Burger createBurger() {
+        return new VeggiBurger();
+    }
+}
+
+class ChickenRestaurant extends Restaurant {
+    @Override
+    public Burger createBurger() {
+        return new ChickenBurger();
+    }
+}
+
+public class FactoryMethod {
+    public static void main(String[] args) {
+        Restaurant restaurant = new VeggieRestaurant();
+        restaurant.prepare();
+
+        restaurant = new ChickenRestaurant();
+        restaurant.prepare();
+    }
+}
