@@ -1,0 +1,28 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "WSL C++ Launch (GDB)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "/mnt/c/Users/lalit.k/lalit/d/dsa/camera/interview/${relativeFileDirname}/${fileBasenameNoExtension}",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "/mnt/c/Users/lalit.k/lalit/d/dsa/camera/interview/${relativeFileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "pipeTransport": {
+                "pipeCwd": "${workspaceFolder}",
+                "pipeProgram": "C:\\Windows\\System32\\wsl.exe",
+                "pipeArgs": [],
+                "debuggerPath": "/usr/bin/gdb"
+            },
+            "sourceFileMap": {
+                "/mnt/c": "C:\\"
+            },
+            "preLaunchTask": "WSL g++ Build"
+        }
+    ]
+}

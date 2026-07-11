@@ -428,7 +428,7 @@ std::mutex mtx;
 std::condition_variable cv;
 bool frameReady = false;
 
-void waitForFrame() {
+void consumer() {
     std::unique_lock<std::mutex> lock(mtx);
     
     // Thread sleeps here. It wakes up when cv is notified, but stays awake
@@ -436,6 +436,23 @@ void waitForFrame() {
     cv.wait(lock, [] { return frameReady; });
     
     // Process frame...
+}
+
+// when frameReady = true ? 
+// write program when frameReady becomes true then it will notify to consumer thread
+// and consumer thread will process the frame , consumer thread should be in wait state until 
+
+void producer() {
+    frameReady = true;
+    cv.notify_all();
+}
+
+
+int main() {
+    std::thread t1(producer);
+    std::thread t2(consumer);
+    t1.join();
+    t2.join();
 }
 ```
 

@@ -1,0 +1,16 @@
+CompileFlags:
+  Add:
+    - "-isystem"
+    - "//wsl.localhost/Ubuntu/usr/include/c++/13"
+    - "-isystem"
+    - "//wsl.localhost/Ubuntu/usr/include/x86_64-linux-gnu/c++/13"
+    - "-isystem"
+    - "//wsl.localhost/Ubuntu/usr/include/c++/13/backward"
+    - "-isystem"
+    - "//wsl.localhost/Ubuntu/usr/lib/gcc/x86_64-linux-gnu/13/include"
+    - "-isystem"
+    - "//wsl.localhost/Ubuntu/usr/local/include"
+    - "-isystem"
+    - "//wsl.localhost/Ubuntu/usr/include/x86_64-linux-gnu"
+    - "-isystem"
+    - "//wsl.localhost/Ubuntu/usr/include"

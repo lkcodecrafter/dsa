@@ -1,0 +1,23 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "WSL g++ Build",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-Command",
+                "$src = wsl wslpath '${file}'; $dest = wsl wslpath '${fileDirname}/${fileBasenameNoExtension}'; wsl g++ -g $src -o $dest"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": "$gcc"
+        }
+    ]
+}

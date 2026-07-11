@@ -1,0 +1,34 @@
+{
+    "configurations": [
+        {
+            "name": "WSL-GCC",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/g++",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "linux-gcc-x64"
+        },
+        {
+            "name": "WSL-GCC-Windows-Host",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "\\\\wsl.localhost\\Ubuntu\\usr\\include\\c++\\13",
+                "\\\\wsl.localhost\\Ubuntu\\usr\\include\\x86_64-linux-gnu\\c++\\13",
+                "\\\\wsl.localhost\\Ubuntu\\usr\\include\\c++\\13\\backward",
+                "\\\\wsl.localhost\\Ubuntu\\usr\\lib\\gcc\\x86_64-linux-gnu\\13\\include",
+                "\\\\wsl.localhost\\Ubuntu\\usr\\local\\include",
+                "\\\\wsl.localhost\\Ubuntu\\usr\\include\\x86_64-linux-gnu",
+                "\\\\wsl.localhost\\Ubuntu\\usr\\include"
+            ],
+            "defines": [],
+            "compilerPath": "",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "windows-gcc-x64"
+        }
+    ],
+    "version": 4
+}
