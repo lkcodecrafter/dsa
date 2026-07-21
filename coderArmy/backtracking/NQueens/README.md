@@ -81,9 +81,18 @@ public class NQueensSolver {
     }
 
     private static boolean isSafe(char[][] board, int row, int col) {
-        for (int i = 0; i < row; i++) if (board[i][col] == 'Q') return false;
-        for (int i = row-1, j = col-1; i >= 0 && j >= 0; i--, j--) if (board[i][j] == 'Q') return false;
-        for (int i = row-1, j = col+1; i >= 0 && j < board.length; i--, j++) if (board[i][j] == 'Q') return false;
+        // where is horizontal check ? .. We are placing one queen per row 
+        // so we don't need to check horizontal
+        
+        // checking column like vertically 
+        for (int i = 0; i < row; i++) if (board[i][col] == 'Q') return false; 
+        
+        // checking diagonally up left
+        for (int i = row-1, j = col-1; i >= 0 && j >= 0; i--, j--) if (board[i][j] == 'Q') return false; 
+            
+        // checking diagonally up right
+        for (int i = row-1, j = col+1; i >= 0 && j < board.length; i--, j++) if (board[i][j] == 'Q') return false; 
+        
         return true;
     }
 

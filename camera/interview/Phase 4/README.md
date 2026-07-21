@@ -50,7 +50,7 @@ There are two main types of sensor architectures:
     *   **Cons**: Slow, high power consumption, and expensive.
     *   *Usage*: Scientific imaging, high-end studio photography.
 
-### 1.3 MIPI CSI-2 Protocol
+### 1.3 MIPI CSI-2 Protocol - MIPI stands for "Mobile Industry Processor Interface"
 How does RAW data travel from the camera sensor to the phone's main processor? It uses the **MIPI CSI-2 (Camera Serial Interface 2)** bus. It is a high-speed, low-power serial interface that streams pixel packets continuously over multiple data lines (lanes) alongside a clock line.
 
 ---

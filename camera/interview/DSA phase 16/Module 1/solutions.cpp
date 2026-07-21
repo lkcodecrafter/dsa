@@ -1,5 +1,6 @@
 #include <iostream>
 #include <set>
+#include <unordered_map>
 #include <vector>
 
 using namespace std;
@@ -248,6 +249,69 @@ int singleNumber(vector<int> &nums) {
 }
 
 // Array-7 | 349. Intersection of Two Arrays
+
+vector<int> intersection(vector<int> &nums1, vector<int> &nums2) {
+  set<int> s1(nums1.begin(), nums1.end());
+  set<int> res;
+  for (auto x : nums2) {
+    if (s1.count(x)) {
+      res.insert(x);
+    }
+  }
+  return vector<int>(res.begin(), res.end());
+}
+
+// Array-8 | 350. Intersection of Two Arrays II
+
+vector<int> intersect(vector<int> &nums1, vector<int> &nums2) {
+  unordered_map<int, int> freq;
+  for (int x : nums1) {
+    freq[x]++;
+  }
+
+  vector<int> res;
+  for (int x : nums2) {
+    if (freq[x] > 0) {
+      res.push_back(x);
+      freq[x]--;
+    }
+  }
+
+  return res;
+}
+
+// 66. Plus One
+vector<int> plusOne(vector<int> &digits) {
+  int n = digits.size();
+  for (int i = n - 1; i >= 0; i--) {
+    if (digits[i] < 9) {
+      digits[i] += 1;
+      return digits;
+    }
+
+    digits[i] = 0;
+  }
+
+  digits.insert(digits.begin(), 1);
+  return digits;
+}
+
+// 283. Move Zeroes
+void moveZeroes(vector<int> &nums) {
+  int j = 0;
+  for (int i = 0; i < nums.size(); i++) {
+    int x = nums[i];
+    if (x != 0) {
+      nums[j] = nums[i];
+      j++;
+    }
+  }
+
+  while (j < nums.size()) {
+    nums[j] = 0;
+    j++;
+  }
+}
 
 int main() {
 

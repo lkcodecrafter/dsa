@@ -60,30 +60,60 @@ int recursiveBS(const std::vector<int>& arr, int start, int end, int target) {
 ```cpp
 #include <vector>
 #include <algorithm>
+ void merge(vector<int>& arr, int left, int mid, int right) {
 
-// 1. Merge Sort
-void merge(std::vector<int>& arr, int l, int m, int r) {
-    int n1 = m - l + 1, n2 = r - m;
-    std::vector<int> L(n1), R(n2);
-    for (int i = 0; i < n1; i++) L[i] = arr[l + i];
-    for (int j = 0; j < n2; j++) R[j] = arr[m + 1 + j];
-    
-    int i = 0, j = 0, k = l;
-    while (i < n1 && j < n2) {
-        if (L[i] <= R[j]) arr[k++] = L[i++];
-        else arr[k++] = R[j++];
+    vector<int> temp;
+
+    int i = left;
+    int j = mid + 1;
+
+    // Compare both halves
+    while (i <= mid && j <= right) {
+        if (arr[i] <= arr[j]) {
+            temp.push_back(arr[i]);
+            i++;
+        } else {
+            temp.push_back(arr[j]);
+            j++;
+        }
     }
-    while (i < n1) arr[k++] = L[i++];
-    while (j < n2) arr[k++] = R[j++];
+
+    // Copy remaining elements from left half
+    while (i <= mid) {
+        temp.push_back(arr[i]);
+        i++;
+    }
+
+    // Copy remaining elements from right half
+    while (j <= right) {
+        temp.push_back(arr[j]);
+        j++;
+    }
+
+    // Copy sorted elements back to original array
+    for (int k = left; k <= right; k++) {
+        arr[k] = temp[k - left];
+    }
 }
 
-void mergeSort(std::vector<int>& arr, int l, int r) {
-    if (l >= r) return;
-    int m = l + (r - l) / 2;
-    mergeSort(arr, l, m);
-    mergeSort(arr, m + 1, r);
-    merge(arr, l, m, r);
+void mergeSort(vector<int>& arr, int left, int right) {
+
+    if (left >= right)
+        return;
+
+    int mid = left + (right - left) / 2;
+
+    mergeSort(arr, left, mid);
+    mergeSort(arr, mid + 1, right);
+
+    merge(arr, left, mid, right);
 }
+
+/*
+Complexity
+Time: O(n log n)
+Space: O(n)
+*/
 
 // 2. Quick Sort (Lomuto Partition Scheme)
 int partition(std::vector<int>& arr, int low, int high) {

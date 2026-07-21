@@ -1,28 +1,73 @@
 {
-    "version": "0.2.0",
-    "configurations": [
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++: g++.exe build and debug active file",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${fileDirname}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "miDebuggerPath": "C:\\msys64\\ucrt64\\bin\\gdb.exe",
+      "setupCommands": [
         {
-            "name": "WSL C++ Launch (GDB)",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "/mnt/c/Users/lalit.k/lalit/d/dsa/camera/interview/${relativeFileDirname}/${fileBasenameNoExtension}",
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "/mnt/c/Users/lalit.k/lalit/d/dsa/camera/interview/${relativeFileDirname}",
-            "environment": [],
-            "externalConsole": false,
-            "MIMode": "gdb",
-            "miDebuggerPath": "/usr/bin/gdb",
-            "pipeTransport": {
-                "pipeCwd": "${workspaceFolder}",
-                "pipeProgram": "C:\\Windows\\System32\\wsl.exe",
-                "pipeArgs": [],
-                "debuggerPath": "/usr/bin/gdb"
-            },
-            "sourceFileMap": {
-                "/mnt/c": "C:\\"
-            },
-            "preLaunchTask": "WSL g++ Build"
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        },
+        {
+          "description": "Set Disassembly Flavor to Intel",
+          "text": "-gdb-set disassembly-flavor intel",
+          "ignoreFailures": true
         }
-    ]
+      ],
+      "preLaunchTask": "C/C++: g++.exe build active file"
+    },
+    {
+      "name": "WSL C++ Launch (GDB)",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "/mnt/c/Users/lalit.k/lalit/d/dsa/camera/interview/${relativeFileDirname}/${fileBasenameNoExtension}",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "/mnt/c/Users/lalit.k/lalit/d/dsa/camera/interview/${relativeFileDirname}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "miDebuggerPath": "/usr/bin/gdb",
+      "pipeTransport": {
+        "pipeCwd": "${workspaceFolder}",
+        "pipeProgram": "C:\\Windows\\System32\\wsl.exe",
+        "pipeArgs": [],
+        "debuggerPath": "/usr/bin/gdb"
+      },
+      "sourceFileMap": {
+        "/mnt/c": "C:\\"
+      },
+      "preLaunchTask": "WSL g++ Build"
+    },
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "externalConsole": true,
+      "cwd": "c:/Users/lalit.k/lalit/d/dsa/camera/interview/Phase 1",
+      "program": "c:/Users/lalit.k/lalit/d/dsa/camera/interview/Phase 1/build/Debug/outDebug",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
 }

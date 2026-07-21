@@ -22,7 +22,7 @@
 bool isPalindrome(const std::string& s) {
     int left = 0, right = s.length() - 1;
     while (left < right) {
-        while (left < right && !isalnum(s[left])) left++;
+        while (left < right && !isalnum(s[left])) left++; // isalpha  means what? a b c d e f g h i j k l m n o p q r s t u v w x y z A B C D E F G H I J K L M N O P Q R S T U V W X Y Z 0-9 alphanumeric
         while (left < right && !isalnum(s[right])) right--;
         if (tolower(s[left]) != tolower(s[right])) return false;
         left++;
