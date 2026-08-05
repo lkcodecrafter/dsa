@@ -43,7 +43,7 @@ The Video4Linux2 (V4L2) subsystem provides a standardized interface for video ca
 
 1. **`v4l2_device`**: The top-level parent structure representing a V4L2 device instance. It serves as a container for all registered sub-devices (`v4l2_subdev`) and helps coordinate actions across the driver stack.
 2. **`video_device`**: Represents the physical character device node (`/dev/videoX`) exposed to user space. It handles file operations (`open`, `close`, `ioctl`, `mmap`, `poll`) and links user-space requests to the driver's internal handlers.
-3. **`v4l2_subdev`**: Represents sub-components of the camera hardware pipeline (e.g., the sensor, lens voice coil motor, flash, or ISP front-end). Splitting these components into individual subdevices allows modular control over $\text{I}^2\text{C}$ chips and ISP sub-blocks.
+3. **`v4l2_subdev`**: Represents sub-components of the camera hardware pipeline (e.g., the sensor, lens voice coil motor, flash, or ISP front-end). Splitting these components into individual subdevices allows modular control over I2C chips and ISP sub-blocks.
 
 ---
 
@@ -380,7 +380,7 @@ int main() {
 
 ### Q12: What are the roles of `VIDIOC_STREAMON` and `VIDIOC_STREAMOFF`?
 **Ans**:
-*   `VIDIOC_STREAMON`: Starts the streaming pipeline. It triggers the driver's start streaming callback, enables the hardware DMA write channels, and commands the sub-devices (via $\text{I}^2\text{C}$ or MIPI CSI-2) to start outputting sensor data.
+*   `VIDIOC_STREAMON`: Starts the streaming pipeline. It triggers the driver's start streaming callback, enables the hardware DMA write channels, and commands the sub-devices (via I2C or MIPI CSI-2) to start outputting sensor data.
 *   `VIDIOC_STREAMOFF`: Stops the streaming pipeline. It shuts down the sensor output, disables DMA channels, aborts any pending buffer transfers, and transitions buffers back to the unqueued state.
 
 ### Q13: How does the V4L2 driver notify user space when a frame is ready?
@@ -390,7 +390,7 @@ int main() {
 **Ans**: Standard single-planar formats store all color planes sequentially in one contiguous buffer. Multi-planar formats allow different color planes (e.g., Y luminance and UV chrominance) to be stored in separate, non-contiguous physical memory areas. This is highly useful in systems where the ISP writes Y and UV channels via separate DMA streams.
 
 ### Q15: Explain how the camera sensor driver communicates exposure and gain values using V4L2 controls.
-**Ans**: V4L2 controls expose hardware registers to user space. When an application sets a control (e.g., `V4L2_CID_EXPOSURE` or `V4L2_CID_ANALOGUE_GAIN`), the V4L2 framework routes the value to the sensor subdevice driver. The subdevice driver translates this value into sensor-specific register values and writes them to the sensor chip over the physical $\text{I}^2\text{C}$ bus.
+**Ans**: V4L2 controls expose hardware registers to user space. When an application sets a control (e.g., `V4L2_CID_EXPOSURE` or `V4L2_CID_ANALOGUE_GAIN`), the V4L2 framework routes the value to the sensor subdevice driver. The subdevice driver translates this value into sensor-specific register values and writes them to the sensor chip over the physical I2C bus.
 
 ### Q16: What is the difference between `VIDIOC_S_CTRL` and `VIDIOC_S_EXT_CTRLS`? Why is the latter preferred for camera settings?
 **Ans**:
@@ -400,9 +400,9 @@ int main() {
 ### Q17: What is a V4L2 subdev, and how does the sensor subdev communicate with the host ISP?
 **Ans**: A V4L2 subdev is a driver representation of an auxiliary camera component. The sensor subdev represents the image sensor chip. It controls exposure, frame rates, and crop configurations. The host ISP driver interacts with the sensor subdev using kernel-internal interfaces (`v4l2_subdev_ops`) to coordinate clock frequencies, MIPI bus routing, and hardware start/stop commands.
 
-### Q18: Explain the role of the $\text{I}^2\text{C}$ interface and the MIPI CSI-2 interface in a typical mobile camera hardware setup.
+### Q18: Explain the role of the I2C interface and the MIPI CSI-2 interface in a typical mobile camera hardware setup.
 **Ans**:
-*   **$\text{I}^2\text{C}$ (Control plane)**: A low-speed serial bus used to read and write sensor configuration registers (e.g., exposure settings, gain, register initialization scripts).
+*   **I2C (Control plane)**: A low-speed serial bus used to read and write sensor configuration registers (e.g., exposure settings, gain, register initialization scripts).
 *   **MIPI CSI-2 (Data plane)**: A high-speed differential bus used to transmit raw image pixel streams (e.g., 10-bit Raw Bayer data) from the sensor to the SoC's receiver interface.
 
 ### Q19: How does the kernel driver handle V4L2 buffer synchronization (dma-buf fences) to coordinate with user-space consumers?
@@ -447,7 +447,7 @@ int main() {
 **Ans**: V4L2 events are an asynchronous messaging channel between the kernel and user space. An application registers to receive events using `VIDIOC_SUBSCRIBE_EVENT`. When an event occurs (e.g., a control value changes, a frame sync interrupt fires, or a HDMI source is plugged in), the kernel pushes a message to the file descriptor's event queue.
 
 ### Q29: How does the camera sensor driver handle different test pattern modes using V4L2 controls?
-**Ans**: The sensor driver exposes the `V4L2_CID_TEST_PATTERN` control, which lists the sensor's supported test patterns (e.g., Color Bars, Solid Red, Walking 1s). When user space selects an index, the driver writes the matching register values to the sensor over $\text{I}^2\text{C}$ to bypass the pixel array and generate the selected pattern digitally.
+**Ans**: The sensor driver exposes the `V4L2_CID_TEST_PATTERN` control, which lists the sensor's supported test patterns (e.g., Color Bars, Solid Red, Walking 1s). When user space selects an index, the driver writes the matching register values to the sensor over I2C to bypass the pixel array and generate the selected pattern digitally.
 
 ### Q30: Explain how the driver handles crop and scale operations using the V4L2 Selection API.
 **Ans**: The Selection API uses `VIDIOC_G_SELECTION` and `VIDIOC_S_SELECTION` to define active rectangles.

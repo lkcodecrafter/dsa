@@ -172,7 +172,7 @@ The system cannot allow arbitrary apps to access the camera at the same time. Th
 
 ## 5. Buffer Management & Memory Flow (Zero-Copy)
 
-Moving megapixel image buffers between processes (App $\leftrightarrow$ Camera Service $\leftrightarrow$ Camera HAL) would consume massive amounts of CPU cycles and memory bandwidth if the pixels were copied. Android achieves high-performance imaging using a **Zero-Copy Architecture** backed by **Gralloc** buffers.
+Moving megapixel image buffers between processes (App <---> Camera Service <---> Camera HAL) would consume massive amounts of CPU cycles and memory bandwidth if the pixels were copied. Android achieves high-performance imaging using a **Zero-Copy Architecture** backed by **Gralloc** buffers.
 
 ### 5.1 Gralloc & BufferQueue Abstractions
 

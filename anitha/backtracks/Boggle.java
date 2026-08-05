@@ -8,30 +8,36 @@ import java.util.Set;
 public class Boggle {
 
     /*
-     * Given an NxN grid of characters and a dictionary, find all words which can be made from the characters
-     * in grid and present in the given dictionary. A word can start and end at any character in the grid.
-     * Next character must be adjacent to previous character in any of the directions i.e. up, down, left,
-     * right and diagonal. Character at each position in grid can be used only once while making a word.
+     * Given an NxN grid of characters and a dictionary, find all words which can be
+     * made from the characters
+     * in grid and present in the given dictionary. A word can start and end at any
+     * character in the grid.
+     * Next character must be adjacent to previous character in any of the
+     * directions i.e. up, down, left,
+     * right and diagonal. Character at each position in grid can be used only once
+     * while making a word.
      * Sample:
-     *      char[][] grid = new char[][] {
-     *          {'c', 'a', 't'},
-     *          {'r', 'r', 'e'},
-     *          {'t', 'o', 'n'}
-     *      };
+     * char[][] grid = new char[][] {
+     * {'c', 'a', 't'},
+     * {'r', 'r', 'e'},
+     * {'t', 'o', 'n'}
+     * };
      *
      *
-     *  Runtime Complexity:
-     *  Exponential, O(Nn).
-     *  where 'N' is the dimension of the grid.
+     * Runtime Complexity:
+     * Exponential, O(Nn).
+     * where 'N' is the dimension of the grid.
      *
-     *  Memory Complexity:
-     *  Quadratic, O(N2).
-     *  where 'N' is the dimension of the grid. Recursive solution will consume memory on the stack as well.
+     * Memory Complexity:
+     * Quadratic, O(N2).
+     * where 'N' is the dimension of the grid. Recursive solution will consume
+     * memory on the stack as well.
      *
-     *  As every character from the grid can appear only once in a word, so we need to maintain a boolean matrix to indicate if the
-     *  corresponding character in grid is used to make this word.
+     * As every character from the grid can appear only once in a word, so we need
+     * to maintain a boolean matrix to indicate if the
+     * corresponding character in grid is used to make this word.
      *
-     * */
+     */
 
     char[][] grid;
     boolean[][] state;
@@ -57,13 +63,12 @@ public class Boggle {
     }
 
     void findWordsRec(int i, int j,
-                      StringBuilder current,
-                      HashSet<String> words) {
+            StringBuilder current,
+            HashSet<String> words) {
 
         if (current.length() > 0 && dictionary.contains(current.toString())) {
             words.add(current.toString());
         }
-
 
         List<Pair> nbrs = findAllNumbers(i, j);
         for (Pair pr : nbrs) {
@@ -79,7 +84,7 @@ public class Boggle {
     }
 
     private Boggle(char[][] g,
-                   HashSet<String> d) {
+            HashSet<String> d) {
         grid = g;
         dictionary = d;
         state = new boolean[g.length][g.length];
@@ -89,7 +94,6 @@ public class Boggle {
             }
         }
     }
-
 
     public HashSet<String> findAllWords() {
         HashSet<String> words = new HashSet<>();
@@ -102,7 +106,6 @@ public class Boggle {
 
         return words;
     }
-
 
     protected static class Pair<K, V> {
 
@@ -124,12 +127,11 @@ public class Boggle {
 
     }
 
-
     public static void main(String[] args) {
-        char[][] grid = new char[][]{
-                {'c', 'a', 't'},
-                {'r', 'r', 'e'},
-                {'t', 'o', 'n'}
+        char[][] grid = new char[][] {
+                { 'c', 'a', 't' },
+                { 'r', 'r', 'e' },
+                { 't', 'o', 'n' }
         };
 
         HashSet<String> dictionary = new HashSet<String>();

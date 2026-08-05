@@ -2,6 +2,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "MementoPattern",
+            "request": "launch",
+            "mainClass": "MementoPattern",
+            "projectName": "dsa_d9362c4b"
+        },
+        {
             "name": "C/C++: g++.exe build and debug active file",
             "type": "cppdbg",
             "request": "launch",

@@ -85,3 +85,23 @@ const int* const ptr;
 
 Nothing changes.
 
+```
+
+Question why do we need shared pointer, if we want to a shared object than we can use static class ? 
+
+Answer : 
+
+Static Variables vs shared_ptr
+Static Variables:
+
+Created once.
+Exist for entire program lifetime.
+Cannot be dynamically resized.
+Not suitable for runtime sharing.
+
+shared_ptr:
+
+Tracks reference count.
+Deletes when count reaches zero.
+Allows dynamic sharing.
+Works with templates and polymorphism.

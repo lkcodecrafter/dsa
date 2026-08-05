@@ -1,0 +1,6 @@
+# Quick Commands for Antigravity Coding Assistant
+
+## 🚀 The Consolidated Learn Command
+Copy and paste this into the chat to configure the assistant's behavior:
+
+/learn Always simplify code in this workspace by removing redundant constructs, adding descriptive inline comments in the code, adding a step-by-step Dry Run in the comments, drawing ASCII visualizations (like nodes and edges for graphs), including a memorization or recall scenario, adding a "1-Minute Quick Revision" section in the comments, and presenting a 1-minute quick review note in the chat summary.

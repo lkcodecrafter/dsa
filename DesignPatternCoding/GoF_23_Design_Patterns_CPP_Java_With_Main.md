@@ -814,7 +814,8 @@ class Mediator {
 using namespace std;
 
 class Memento {
-public: int state;
+public: 
+    int state;
     Memento(int s):state(s){}
 };
 

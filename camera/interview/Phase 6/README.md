@@ -331,7 +331,9 @@ They are sync file descriptors representing hardware execution sync points.
 **Ans**: V4L2 device nodes (e.g. `/dev/video0`, `/dev/v4l-subdev*`) are the OS kernel-level interfaces to control the sensor and video buffers. The Camera HAL3 operates in user space and acts as a translator: it translates higher-level Android framework Binder calls into lower-level V4L2 `ioctl()` commands (e.g., `VIDIOC_S_CTRL`, `VIDIOC_QBUF`) to communicate with the kernel drivers.
 
 ### Q21: Explain how dynamic sensor mode switching (binning vs full resolution) is handled in the HAL.
-**Ans**: When the stream configuration calls for high-resolution output (e.g., 50MP snapshot) versus low-resolution output (e.g., 12.5MP binned preview), the HAL intercepts this during `configure_streams()`. The HAL communicates with the sensor driver to modify the sensor crop registers and toggle pixel binning modes over the $\text{I}^2\text{C}$ bus before restarting the streaming pipeline.
+**Ans**: When the stream configuration calls for high-resolution output (e.g., 50MP snapshot) versus low-resolution output (e.g., 12.5MP binned preview), the HAL intercepts this during `configure_streams()`. The HAL communicates with the sensor driver to modify the sensor crop registers and toggle pixel binning modes over the I2C bus before restarting the streaming pipeline.
+
+I2C - Inter-Integrated Circuit 
 
 ### Q22: What are "reprocess" streams from the HAL's perspective?
 **Ans**: During reprocessing, the framework passes an input buffer (usually RAW/YUV) containing image data to the HAL inside a request. The HAL configures the ISP to route this input buffer (via DMA read) into the ISP front-end, runs the requested image processing steps, and writes the output to the requested destination buffer (e.g. compiling RAW to JPEG).

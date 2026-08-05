@@ -68,4 +68,58 @@ void dfs(int i, int j, int n, int m, vector<vector<int>> &grid) {
   dfs(i, j - 1, n, m, grid);
 }
 
-int main() { cout << "Hello"; }
+vector<vector<int>> floodFill(vector<vector<int>> &image, int sr, int sc,
+                              int color) {
+  vector<vector<int>> ans = image;
+  int s = image[sr][sc];
+  queue<pair<int, int>> q;
+  q.push({sr, sc});
+
+  vector<int> dirX = {-1, 1, 0, 0};
+  vector<int> dirY = {0, 0, -1, 1};
+
+  while (q !.empty()) {
+    int k = q.size();
+    while (--k) {
+      auto val = q.front();
+      q.pop();
+      int xx = val.first;
+      int yy = val.second;
+
+      for (int i = 0; i < 4; i++) {
+        int xxx = xx + dirX[i];
+        int yyy = yy + dirY[i];
+
+        if (xxx >= 0 && xxx < m && yyy >= 0 && yyy < n && ans[sr][sc] != s &&
+            color[sr][sc] != color) {
+          ans[sr][sc] = 2;
+          q.push({xxx, yyy});
+        }
+      }
+    }
+  }
+  return ans;
+}
+
+bool isCycle(int V, vector<int> adj[]) {
+  vector<bool> vis(V);
+  for (int i = 0; i < V; i++) {
+    if (!vis[i]) {
+      if (bfs(i, V, adj, vis))
+        return true;
+    }
+  }
+  return false;
+}
+bool bfs(int node, int V, vector<int> adj[], vector<bool> vis) {
+  vis[node] = true;
+  while (int v : adj[V]) {
+    if (!vis[v]) {
+      bfs(v, V, adj, vis);
+      return true;
+    } else if (v != node) {
+      return true;
+    }
+  }
+  return false;
+}

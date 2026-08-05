@@ -270,6 +270,8 @@ Moves the physical glass lens elements to make the image sharp.
     *   Moves the lens back and forth step-by-step while measuring the contrast of pixels in a target area.
     *   *Rule*: A sharp image has high contrast between adjacent pixels; a blurry image has low contrast.
     *   **Pros/Cons**: Highly accurate, but slow and hunts back-and-forth.
+    * What is contrast?
+    Ans: Contrast is the difference in brightness or color between parts of an image. In simple terms, it's the difference between the light and dark areas of an image.
 *   **Phase Detection AF (PDAF)**:
     *   Uses specialized split-pixels on the sensor to split incoming light into two images. The algorithm measures the physical offset (phase difference) between these images to calculate exactly how far and in which direction the lens needs to move.
     *   **Pros/Cons**: Extremely fast and direct, but requires special sensor hardware.
@@ -301,6 +303,10 @@ The ISP merges the three frames using a alignment and blending algorithm, creati
 
 ### Q1: What is the primary function of a CMOS image sensor?
 **Ans**: To convert incoming light (photons) into an electrical charge (electrons), amplify that charge into a voltage signal, and digitize it using an ADC into binary RAW pixel data.
+
+Amplify ? 
+Ans: amplify mean to increase the strength of a signal. 
+Example: 
 
 ### Q2: Why does a Bayer filter use 50% Green, 25% Red, and 25% Blue?
 **Ans**: To match the human visual system, which has evolved to be far more sensitive to green light and detail (luminance) than to red or blue.
@@ -367,7 +373,7 @@ The ISP merges the three frames using a alignment and blending algorithm, creati
 **Ans**: Pixels that are permanently damaged (stuck high as pure white, or dead as pure black). The ISP identifies them by comparing a pixel value to its neighbors; if the difference exceeds a threshold, it replaces the value with the neighbor average.
 
 ### Q20: What is Gamma Correction?
-**Ans**: The human eye has a non-linear (logarithmic) response to light intensity, meaning we are much better at distinguishing dark-level changes than bright ones. Gamma Correction curves the linear sensor values to match human perception.
+**Ans**: The human eye has a non-linear (logarithmic) response to light intensity, meaning we are much better at distinguishing dark-level changes than bright ones. Gamma Correction curves the linear sensor values to match human perception. In simple words Gamma Correction is a curve that is applied to the linear sensor values to match human perception.
 
 ### Q21: What is a Rolling Shutter?
 **Ans**: An acquisition method in CMOS sensors where rows of pixels are read out sequentially one-by-one rather than all at once. If the camera or subject moves fast, it causes warping or "jello" effects.
@@ -431,9 +437,9 @@ A significant portion of your interview questions targets *trade-offs*. Memorize
 
 ### Phase 3: Memorize the ISP Pipeline Sequence
 You must be able to write the ISP pipeline stages from memory. Use this sequential logic:
-1.  **Prep the RAW:** Subtract sensor noise (**Black Level**) $\rightarrow$ Fix broken pixels (**Defect Pixel**) $\rightarrow$ Brighten corners (**Lens Shading**).
-2.  **Clean & Color:** Remove grain noise (**Denoise**) $\rightarrow$ Interpolate colors (**Demosaic**).
-3.  **Optimize:** Shift colors to match reality (**Color Correction Matrix**) $\rightarrow$ Scale intensity for human eyes (**Gamma Correction**).
+1.  **Prep the RAW:** Subtract sensor noise (**Black Level**) -> Fix broken pixels (**Defect Pixel**) -> Brighten corners (**Lens Shading**).
+2.  **Clean & Color:** Remove grain noise (**Denoise**) -> Interpolate colors (**Demosaic**).
+3.  **Optimize:** Shift colors to match reality (**Color Correction Matrix**) -> Scale intensity for human eyes (**Gamma Correction**).
 4.  **Output:** Convert to standard format (**YUV/RGB**).
 
 ---

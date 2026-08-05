@@ -1,54 +1,103 @@
 /*
 QUESTION:
-Given a Directed Graph with V vertices (Numbered from 0 to V-1) and E edges, check whether it contains any cycle or not.
+Given a Directed Graph with V vertices (Numbered from 0 to V-1) and E edges,
+check whether it contains any cycle or not.
 
 APPROACH:
-- We can use Topological Sorting to check if a directed graph contains a cycle or not.
-- If a directed graph is a DAG (Directed Acyclic Graph), it means it does not contain any cycle.
-- So, to check for a cycle, we perform a variation of Topological Sorting using Kahn's algorithm, which is based on the concept of indegree.
-- If there is no cycle in the graph, we can always find a node with an indegree of 0 (no incoming edges) and remove it along with its outgoing edges.
-- We keep repeating this process, and if at any point we are unable to find a node with an indegree of 0, it means there is a cycle in the graph.
+- We can use Topological Sorting to check if a directed graph contains a cycle
+or not.
+- If a directed graph is a DAG (Directed Acyclic Graph), it means it does not
+contain any cycle.
+- So, to check for a cycle, we perform a variation of Topological Sorting using
+Kahn's algorithm, which is based on the concept of indegree.
+- If there is no cycle in the graph, we can always find a node with an indegree
+of 0 (no incoming edges) and remove it along with its outgoing edges.
+- We keep repeating this process, and if at any point we are unable to find a
+node with an indegree of 0, it means there is a cycle in the graph.
 
 COMPLEXITY ANALYSIS:
-- Time Complexity: O(V + E), where V is the number of vertices (nodes) and E is the number of edges in the graph. We perform a BFS-like traversal of all nodes and edges.
-- Space Complexity: O(V), where V is the number of vertices (nodes) in the graph. We use additional space to store the indegree of each node and the queue for BFS.
+- Time Complexity: O(V + E), where V is the number of vertices (nodes) and E is
+the number of edges in the graph. We perform a BFS-like traversal of all nodes
+and edges.
+- Space Complexity: O(V), where V is the number of vertices (nodes) in the
+graph. We use additional space to store the indegree of each node and the queue
+for BFS.
+
+DRY RUN:
+
+Scenario 1: Directed Acyclic Graph (No Cycle)
+Input: V = 4, adj = {0->[1], 1->[2], 2->[3], 3->[]}
+1. Indegree Calculation:
+   - Initial indeg: [0, 0, 0, 0]
+   - After traversal:
+     - 0 -> 1: indeg[1] = 1
+     - 1 -> 2: indeg[2] = 1
+     - 2 -> 3: indeg[3] = 1
+   - Final indeg: [0, 1, 1, 1]
+2. Queue Initialization:
+   - Nodes with indegree 0: 0. Queue q = [0]
+3. BFS Traversal:
+   - Pop 0: cnt = 1. Neighbors: [1]. Decrement indeg[1] to 0. Push 1. q = [1]
+   - Pop 1: cnt = 2. Neighbors: [2]. Decrement indeg[2] to 0. Push 2. q = [2]
+   - Pop 2: cnt = 3. Neighbors: [3]. Decrement indeg[3] to 0. Push 3. q = [3]
+   - Pop 3: cnt = 4. Neighbors: [].
+   - q is empty. Loop ends.
+4. Return Check:
+   - cnt (4) == V (4) -> Returns !(true) -> false (No Cycle)
+
+Scenario 2: Graph with a Cycle (Cyclic)
+Input: V = 3, adj = {0->[1], 1->[2], 2->[0]}
+1. Indegree Calculation:
+   - After traversal:
+     - 0 -> 1: indeg[1] = 1
+     - 1 -> 2: indeg[2] = 1
+     - 2 -> 0: indeg[0] = 1
+   - Final indeg: [1, 1, 1]
+2. Queue Initialization:
+   - Nodes with indegree 0: None. Queue q = []
+3. BFS Traversal:
+   - q is empty. Loop is skipped.
+4. Return Check:
+   - cnt (0) != V (3) -> Returns !(false) -> true (Cycle Detected)
 */
 
+
 bool isCyclic(int V, vector<int> adj[]) {
-    vector<int> indeg(V, 0);
+  vector<int> indeg(V, 0);
 
-    // Calculate the indegree of each node
-    for (int i = 0; i < V; i++) {
-        for (auto it : adj[i]) {
-            indeg[it]++;
-        }
+  // Calculate the indegree of each node
+  for (int i = 0; i < V; i++) {
+    for (auto it : adj[i]) {
+      indeg[it]++;
     }
+  }
 
-    queue<int> q;
+  queue<int> q;
 
-    // Find nodes with indegree 0 and add them to the queue
-    for (int i = 0; i < V; i++) {
-        if (indeg[i] == 0) {
-            q.push(i);
-        }
+  // Find nodes with indegree 0 and add them to the queue
+  for (int i = 0; i < V; i++) {
+    if (indeg[i] == 0) {
+      q.push(i);
     }
+  }
 
-    int cnt = 0;
+  int cnt = 0;
 
-    while (!q.empty()) {
-        int node = q.front();
-        q.pop();
-        cnt++;
+  while (!q.empty()) {
+    int node = q.front();
+    q.pop();
+    cnt++;
 
-        // Remove the node and its outgoing edges
-        for (auto i : adj[node]) {
-            indeg[i]--;
-            if (indeg[i] == 0) {
-                q.push(i);
-            }
-        }
+    // Remove the node and its outgoing edges
+    for (auto i : adj[node]) {
+      indeg[i]--;
+      if (indeg[i] == 0) {
+        q.push(i);
+      }
     }
+  }
 
-    // If the count of removed nodes is not equal to the total number of nodes, there is a cycle
-    return !(cnt == V);
+  // If the count of removed nodes is not equal to the total number of nodes,
+  // there is a cycle
+  return !(cnt == V);
 }
