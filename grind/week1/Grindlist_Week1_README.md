@@ -150,6 +150,8 @@ public:
  * | 5    | 4       | 4       | l2 (value 4)    | l2 -> null       |
  * | 6    | 4       | null    | l1 (remainder)  | (loop ends)      |
  */
+
+ //if duplicate use <= instead of <
 class Solution {
 public:
     ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
@@ -375,7 +377,7 @@ public:
 
 ---
 
-# 7. Valid Anagram
+# 7. Valid Anagram - means same character frequency
 **Idea:** Count character occurrences across both strings and verify balance.
 
 ```cpp
@@ -411,6 +413,7 @@ public:
  * | 7    | 'm'  | cnt[12] -> 1              | 'm'  | cnt[12] -> 0              |
  * All values in cnt are 0 -> return true.
  */
+ 
 class Solution {
 public:
     bool isAnagram(string s, string t) {
@@ -458,12 +461,13 @@ public:
  * 3. Return -1.
  *
  * Dry Run:
- * nums = [-1, 0, 3, 5, 9, 12], target = 9
- *
- * | Iteration | left | right | mid | nums[mid] | Comparison |
- * |-----------|------|-------|-----|-----------|------------|
- * | 1         | 0    | 5     | 2   | 3         | 3 < 9 -> left = 3 |
- * | 2         | 3    | 5     | 4   | 9         | 9 == 9 -> Return 4 |
+ * nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], target = 1
+ * size of nums = 10, right = 9 (index of last element)
+ * | Iteration | left | right | mid | nums[mid] | Comparison | Next Step |
+ * |-----------|------|-------|-----|-----------|------------|-----------|
+ * | 1         | 0    | 9     | 4   | 5         | 1 < 5      | target < nums[mid] -> right = mid - 1 = 3 |
+ * | 2         | 0    | 3     | 1   | 2         | 1 < 2      | target < nums[mid] -> right = mid - 1 = 0 |
+ * | 3         | 0    | 0     | 0   | 1         | 1 == 1     | target == nums[mid] -> Return 0 |
  */
 class Solution {
 public:
@@ -532,7 +536,13 @@ public:
         // Base case: check grid boundary limits
         if (r < 0 || c < 0 || r >= img.size() || c >= img[0].size()) return;
 
-        // Base case: stop if pixel is not of target old color
+        // Base case: stop if pixel is not of the target original color (old)
+        // Why we return: We only want to fill the connected group of the SAME starting color.
+        // If a pixel has a different color, it's not part of the component we are coloring, so we stop (return) to avoid painting over it.
+        //
+        // Example: If starting color (old) is 1, and new color is 6:
+        // - img[r][c] = 1 -> colors match, so we color it 6 and recurse.
+        // - img[r][c] = 2 -> colors differ, so we return immediately to leave it untouched.
         if (img[r][c] != old) return;
 
         img[r][c] = color; // Perform color fill
@@ -595,6 +605,7 @@ public:
  * - Root = 6: Both 2 and 4 are < 6 -> root = root->left (2).
  * - Root = 2:
  *   - p->val (2) is equal to root->val. Split point! Return 2.
+ * where is 4? -> p has value 2 and q has value 4. root has value 6. since 2 is smaller than 6 q is also smaller than 6, so we go left. q is still smaller than 6 so we go left. p is equal to 2 so we return 2. q is still smaller than 6 so we go left. q is equal to 4 so we return 4.
  */
 class Solution {
 public:
@@ -630,12 +641,30 @@ public:
  * Pattern: Optimized Postorder DFS Height check (Single-Pass O(N))
  *
  * Visual representation:
- *        1
- *       / \
- *      2   3
- *     / \
- *    4   5
- *   (Balanced: height diffs <= 1)
+ * 
+ * Case A: Balanced Tree (Nodes show "value (height)")
+ *         3 (ht=3)
+ *        / \
+ *   9 (ht=1) 20 (ht=2)
+ *           /  \
+ *      15 (ht=1) 7 (ht=1)
+ * 
+ * Max height difference at all nodes is <= 1. Tree is Balanced.
+ * 
+ * Case B: Unbalanced Tree (Failure bubbles up)
+ *           1 (returns -1)
+ *          / \
+ *  2 (ht=3)   2 (ht=1)
+ *     /
+ * 3 (ht=2)
+ *   /
+ *  4 (ht=1)
+ * 
+ * At Node 2 (left child of 1):
+ * - Left subtree height (Node 3) = 2
+ * - Right subtree height (null) = 0
+ * - Difference: |2 - 0| = 2 > 1. Unbalanced! Returns -1.
+ * - The -1 bubbles up to root 1, making isBalanced return false.
  *
  * Memorization Hook:
  * "Calculate height from bottom-up. If any subtree is unbalanced,
