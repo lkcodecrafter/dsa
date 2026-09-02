@@ -451,6 +451,32 @@ public:
  * | 0  | -1 | 1              | 1 + 1 = 2            | 2 % 2 = 0           | 2 / 2 = 1     | "00"         | Middle digit of a: 1 + carry       |
  * | -1 | -1 | 1              | 1                    | 1 % 2 = 1           | 1 / 2 = 0     | "001"        | Only carry remains                 |
  * | -  | -  | -              | -                    | -                   | -             | "100"        | Loop ends. Reverse "001" -> "100"  |
+
+
+how sum = carry + a[i] + b[j]:
+    - Loop 1 (Rightmost digits): 0 + 1 + 1 = 2
+      * 0 comes from carry (initial carry = 0)
+      * 1 comes from a[1] ('1' from "11"), added when the first condition `if (i >= 0)` is met.
+      * 1 comes from b[0] ('1' from "1"), added when the next condition `if (j >= 0)` is met.
+    - Loop 2 (Middle digit of a): 1 + 1 + 0 = 2
+      * 1 comes from carry (from Loop 1: 2 / 2 = 1)
+      * 1 comes from a[0] ('1' from "11"), added when the first condition `if (i >= 0)` is met.
+      * 0 comes from b[j] (since j is -1, the next condition `if (j >= 0)` is false, adding nothing).
+    - Loop 3 (Final carry): 1 + 0 + 0 = 1
+      * 1 comes from carry (from Loop 2: 2 / 2 = 1)
+      * 0 comes from a[i] (since i is -1, the condition `if (i >= 0)` is false, adding nothing).
+      * 0 comes from b[j] (since j is -1, the condition `if (j >= 0)` is false, adding nothing).
+
+sum % 2 gives the current binary digit:
+    - Loop 1: 2 % 2 = 0 
+    - Loop 2: 2 % 2 = 0
+    - Loop 3: 1 % 2 = 1
+
+sum / 2 gives the new carry value:
+    - Loop 1: 2 / 2 = 1 (carried to Loop 2)
+    - Loop 2: 2 / 2 = 1 (carried to Loop 3)
+    - Loop 3: 1 / 2 = 0 (loop terminates)
+ 
  */
 class Solution {
 public:
@@ -469,8 +495,8 @@ public:
             // Loop 3: i=-1, j=-1, carry=1 -> sum = 1. ans = "001", carry = 0
             int sum = carry;
 
-            if (i >= 0) sum += a[i--] - '0';
-            if (j >= 0) sum += b[j--] - '0';
+            if (i >= 0) sum += a[i--] - '0'; 
+            if (j >= 0) sum += b[j--] - '0'; 
 
             ans.push_back(sum % 2 + '0'); // Append the binary digit
             carry = sum / 2;              // Determine new carry value
@@ -641,12 +667,38 @@ public:
  *    2 (returns 1 + max(1, 0) = 2)
  *   /
  *  3 (returns 1 + max(0, 0) = 1)
+
+ so the ans is 3 
  *
  * Call Trace:
  * - maxDepth(1) -> returns 1 + max(maxDepth(2), maxDepth(nullptr))
  *   - maxDepth(2) -> returns 1 + max(maxDepth(3), maxDepth(nullptr))
  *     - maxDepth(3) -> returns 1 + max(nullptr, nullptr) = 1 + 0 = 1
- */
+ *
+ 
+one more tree visualization 
+
+         1
+        / \
+       2   3
+      / \
+     4   5
+    /
+   6
+
+call Trace 
+
+maxDepth(1) -> 1 + max(maxDepth(2), maxDepth(3)) maxDepth(1) = 1+max(2,1) = 3
+  maxDepth(2) -> 1 + max(maxDepth(4), maxDepth(5)) maxDepth(2) = 1+max(1,1) =2
+     maxDepth(4) -> 1 + max(maxDepth(6), maxDepth(null)) maxDepth(4) = 1+max(1,0) =2
+        maxDepth(6) -> 1 + max(maxDepth(null), maxDepth(null)) maxDepth(6) = 1+max(0,0) =1
+     maxDepth(5) -> 1 + max(maxDepth(null), maxDepth(null)) maxDepth(5) = 1+max(0,0) =1
+  maxDepth(3) -> 1 + max(maxDepth(null), maxDepth(null)) maxDepth(3) = 1+max(0,0) =1
+
+so the answer will be 4 (1->2->4->6) is the longest path and height of tree is 4 
+
+
+ */ 
 class Solution {
 public:
     int maxDepth(TreeNode* root) {
@@ -655,10 +707,7 @@ public:
         }
 
         // Return 1 (current node) + maximum of left and right child heights
-        return 1 + max(
-            maxDepth(root->left),
-            maxDepth(root->right)
-        );
+        return 1 + max(maxDepth(root->left),maxDepth(root->right));
     }
 };
 ```

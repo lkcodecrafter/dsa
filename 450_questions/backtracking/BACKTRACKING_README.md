@@ -1,0 +1,30 @@
+# 450 DSA Cracker - Backtracking Solutions
+
+This folder contains optimal C++ solutions for the Backtracking topic of the 450 DSA Cracker Sheet. Each solution is implemented in a separate file following the workspace coding guidelines.
+
+## Quick Reference Table
+
+| No. | Question | Practice Link | C++ Solution |
+| :--- | :--- | :--- | :--- |
+| 1 | Rat in a maze Problem | [GeeksforGeeks](https://practice.geeksforgeeks.org/problems/rat-in-a-maze-problem/1) | [01_rat_in_maze.cpp](file:///c:/Users/lalit.k/lalit/d/dsa/450_questions/backtracking/01_rat_in_maze.cpp) |
+| 2 | Printing all solutions in N-Queen Problem | [GeeksforGeeks](https://www.geeksforgeeks.org/printing-solutions-n-queen-problem/) | [02_n_queen.cpp](file:///c:/Users/lalit.k/lalit/d/dsa/450_questions/backtracking/02_n_queen.cpp) |
+| 3 | Word Break Problem using Backtracking | [GeeksforGeeks](https://practice.geeksforgeeks.org/problems/word-break-part-2/0) | [03_word_break_backtracking.cpp](file:///c:/Users/lalit.k/lalit/d/dsa/450_questions/backtracking/03_word_break_backtracking.cpp) |
+| 4 | Remove Invalid Parentheses | [LeetCode](https://leetcode.com/problems/remove-invalid-parentheses/) | [04_remove_invalid_parentheses.cpp](file:///c:/Users/lalit.k/lalit/d/dsa/450_questions/backtracking/04_remove_invalid_parentheses.cpp) |
+| 5 | Sudoku Solver | [GeeksforGeeks](https://practice.geeksforgeeks.org/problems/solve-the-sudoku/0) | [05_sudoku_solver.cpp](file:///c:/Users/lalit.k/lalit/d/dsa/450_questions/backtracking/05_sudoku_solver.cpp) |
+| 6 | m Coloring Problem | [GeeksforGeeks](https://practice.geeksforgeeks.org/problems/m-coloring-problem/0) | [06_m_coloring.cpp](file:///c:/Users/lalit.k/lalit/d/dsa/450_questions/backtracking/06_m_coloring.cpp) |
+| 7 | Print all palindromic partitions of a string | [GeeksforGeeks](https://www.geeksforgeeks.org/given-a-string-print-all-possible-palindromic-partition/) | [07_palindromic_partitions.cpp](file:///c:/Users/lalit.k/lalit/d/dsa/450_questions/backtracking/07_palindromic_partitions.cpp) |
+| 8 | Subset Sum Problem | [GeeksforGeeks](https://practice.geeksforgeeks.org/problems/subset-sum-problem2014/1) | [08_subset_sum.cpp](file:///c:/Users/lalit.k/lalit/d/dsa/450_questions/backtracking/08_subset_sum.cpp) |
+| 9 | The Knight’s tour problem | [GeeksforGeeks](https://www.geeksforgeeks.org/the-knights-tour-problem-backtracking-1/) | [09_knights_tour.cpp](file:///c:/Users/lalit.k/lalit/d/dsa/450_questions/backtracking/09_knights_tour.cpp) |
+| 10 | Tug of War | [GeeksforGeeks](https://www.geeksforgeeks.org/tug-of-war/) | [10_tug_of_war.cpp](file:///c:/Users/lalit.k/lalit/d/dsa/450_questions/backtracking/10_tug_of_war.cpp) |
+| 11 | Find shortest safe route in path with landmines | [GeeksforGeeks](https://www.geeksforgeeks.org/find-shortest-safe-route-in-a-path-with-landmines/) | [11_shortest_safe_route_landmines.cpp](file:///c:/Users/lalit.k/lalit/d/dsa/450_questions/backtracking/11_shortest_safe_route_landmines.cpp) |
+| 12 | Combinational Sum | [GeeksforGeeks](https://practice.geeksforgeeks.org/problems/combination-sum/0) | [12_combination_sum.cpp](file:///c:/Users/lalit.k/lalit/d/dsa/450_questions/backtracking/12_combination_sum.cpp) |
+| 13 | Find Max number by doing at-most K swaps | [GeeksforGeeks](https://practice.geeksforgeeks.org/problems/largest-number-in-k-swaps/0) | [13_max_number_k_swaps.cpp](file:///c:/Users/lalit.k/lalit/d/dsa/450_questions/backtracking/13_max_number_k_swaps.cpp) |
+| 14 | Print all permutations of a string | [GeeksforGeeks](https://practice.geeksforgeeks.org/problems/permutations-of-a-given-string/0) | [14_permutations_of_string.cpp](file:///c:/Users/lalit.k/lalit/d/dsa/450_questions/backtracking/14_permutations_of_string.cpp) |
+| 15 | Find if there is path > k length from source | [GeeksforGeeks](https://www.geeksforgeeks.org/find-if-there-is-a-path-of-more-than-k-length-from-a-source/) | [15_path_more_than_k_length.cpp](file:///c:/Users/lalit.k/lalit/d/dsa/450_questions/backtracking/15_path_more_than_k_length.cpp) |
+| 16 | Longest Possible Route in Matrix with Hurdles | [GeeksforGeeks](https://www.geeksforgeeks.org/longest-possible-route-in-a-matrix-with-hurdles/) | [16_longest_possible_route_hurdles.cpp](file:///c:/Users/lalit.k/lalit/d/dsa/450_questions/backtracking/16_longest_possible_route_hurdles.cpp) |
+| 17 | Print all possible paths in mXn matrix | [GeeksforGeeks](https://www.geeksforgeeks.org/print-all-possible-paths-from-top-left-to-bottom-right-of-a-mxn-matrix/) | [17_print_all_paths_matrix.cpp](file:///c:/Users/lalit.k/lalit/d/dsa/450_questions/backtracking/17_print_all_paths_matrix.cpp) |
+| 18 | Partition of set into K subsets with equal sum | [GeeksforGeeks](https://practice.geeksforgeeks.org/problems/partition-array-to-k-subsets/1) | [18_partition_k_subsets_equal_sum.cpp](file:///c:/Users/lalit.k/lalit/d/dsa/450_questions/backtracking/18_partition_k_subsets_equal_sum.cpp) |
+| 19 | Find K-th Permutation Sequence of N numbers | [GeeksforGeeks](https://www.geeksforgeeks.org/find-the-k-th-permutation-sequence-of-first-n-natural-numbers/) | [19_kth_permutation_sequence.cpp](file:///c:/Users/lalit.k/lalit/d/dsa/450_questions/backtracking/19_kth_permutation_sequence.cpp) |
+| 20 | Implement Stack from Scratch | [TutorialsPoint](https://www.tutorialspoint.com/javaexamples/data_stack.htm) | [20_implement_stack.cpp](file:///c:/Users/lalit.k/lalit/d/dsa/450_questions/backtracking/20_implement_stack.cpp) |
+| 21 | Implement Queue from Scratch | [GeeksforGeeks](https://www.geeksforgeeks.org/queue-set-1introduction-and-array-implementation/) | [21_implement_queue.cpp](file:///c:/Users/lalit.k/lalit/d/dsa/450_questions/backtracking/21_implement_queue.cpp) |
+| 22 | Implement 2 stack in an array | [GeeksforGeeks](https://practice.geeksforgeeks.org/problems/implement-two-stacks-in-an-array/1) | [22_implement_two_stacks_array.cpp](file:///c:/Users/lalit.k/lalit/d/dsa/450_questions/backtracking/22_implement_two_stacks_array.cpp) |
