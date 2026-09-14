@@ -93,7 +93,7 @@ int* p = new int(5);
 // forgot delete
 ```
 
-## Dangling Pointer
+## Dangling Pointer - is pointer which points to memory which is not anymore allocated for us
 
 ``` cpp
 int* p = new int(5);
@@ -147,15 +147,34 @@ No manual delete required.
 # 8. Interview Questions
 
 1.  Stack vs Heap?
+Ans. Stack memory is used for static memory allocation, whereas heap memory is used for dynamic memory allocation.
+
 2.  What is a pointer?
+Ans. pointer is a variable which stores the address of another variable.
+
 3.  What is a reference?
+Ans. Reference is an alias for another variable.
+
 4.  Difference between pointer and reference?
+Ans. Pointers can point to different memory locations, while references cannot. Pointers can be null, while references cannot. Pointers can be reseated, while references cannot.
+
 5.  What is a dangling pointer?
+Ans. Dangling pointer is a pointer which points to memory which is not anymore allocated for us.
+
 6.  What is a wild pointer?
+Ans. Wild pointer is a pointer which points to an unknown memory location.
+
 7.  What is a memory leak?
+Ans. Memory leak is a memory which is allocated but not freed.
+
 8.  Why use RAII?
+Ans. RAII is used to manage resources in embedded device, mainly in embedded camera HAL.
+
 9.  Why avoid raw `new`?
+Ans. Raw `new` is used to allocate memory in heap, which can lead to memory leaks.
+
 10. Why are smart pointers preferred?
+Ans. Smart pointers are preferred because they automatically release the memory when the pointer goes out of scope.
 
 ------------------------------------------------------------------------
 

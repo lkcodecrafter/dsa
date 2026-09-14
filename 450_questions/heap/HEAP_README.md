@@ -2,7 +2,13 @@
 
 This folder contains optimal, simple, and clean C++ solutions for the Heap topic of the 450 DSA Cracker Sheet. Each solution includes inline explanations, ASCII diagrams, dry runs, recall scenarios, and 1-minute quick revisions.
 
+## 🌟 Visual Learning & Interactive Tools
+
+- 🌐 **Interactive Web Visualizer**: [`heap_visualizer.html`](file:///c:/Users/lalit.k/lalit/d/dsa/450_questions/heap/heap_visualizer.html) (Step-by-step tree/array animations, dual-heap streaming balancing, heap sort partitioning, and custom inputs)
+- 📊 **Complete Visualization Guide**: [`HEAP_VISUALIZATION.md`](file:///c:/Users/lalit.k/lalit/d/dsa/450_questions/heap/HEAP_VISUALIZATION.md) (ASCII tree topologies, math index mechanics, and aligned dry runs for all 18 problems)
+
 ## Quick Reference Table
+
 
 | No. | Question | Practice Link | C++ Solution |
 | :--- | :--- | :--- | :--- |

@@ -758,11 +758,11 @@ int findEquilibriumIndex(const std::vector<int>& arr) {
     *   `totalSum = 0` (sum calculated initially is `0`)
 
 | Step | Index | Element | `totalSum` (rightSum) | `leftSum` | Comparison (`leftSum == totalSum`) | Next `leftSum` |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **1** | 0 | -7 | 7 | 0 | `0 == 7` (False) | -7 |
-| **2** | 1 | 1 | 6 | -7 | `-7 == 6` (False) | -6 |
-| **3** | 2 | 5 | 1 | -6 | `-6 == 1` (False) | -1 |
-| **4** | 3 | 2 | -1 | -1 | `-1 == -1` (True) | **Returns 3** |
+| :--- | :---  | :---    | :---                  | :---      | :---                               | :---           |
+| **1** | 0   | -7      | 7                     | 0         | `0 == 7` (False)                   | -7             |
+| **2** | 1   | 1       | 6                     | -7        | `-7 == 6` (False)                  | -6             |
+| **3** | 2   | 5       | 1                     | -6        | `-6 == 1` (False)                  | -1             |
+| **4** | 3   | 2       | -1                    | -1        | `-1 == -1` (True)                  | **Returns 3** |
 
 *   **Complexity:** Time: $O(N)$, Space: $O(1)$.
 
@@ -1047,11 +1047,17 @@ void rotate(std::vector<std::vector<int>>& matrix) {
 ```
 *   **🔍 Dry Run:**
     *   **Input:**
-        $$\begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{pmatrix}$$
+        $$\begin{pmatrix}  1 & 2 & 3 \\ 
+                           4 & 5 & 6 \\ 
+                           7 & 8 & 9 \end{pmatrix}$$
     *   **Transpose:**
-        $$\begin{pmatrix} 1 & 4 & 7 \\ 2 & 5 & 8 \\ 3 & 6 & 9 \end{pmatrix}$$
+        $$\begin{pmatrix}  1 & 4 & 7 \\ 
+                           2 & 5 & 8 \\ 
+                           3 & 6 & 9 \end{pmatrix}$$
     *   **Reverse Rows:**
-        $$\begin{pmatrix} 7 & 4 & 1 \\ 8 & 5 & 2 \\ 9 & 6 & 3 \end{pmatrix}$$
+        $$\begin{pmatrix} 7 & 4 & 1 \\ 
+                           8 & 5 & 2 \\ 
+                           9 & 6 & 3 \end{pmatrix}$$
 *   **Complexity:** Time: $O(N^2)$, Space: $O(1)$.
 
 ### 🎯 Solution 5.5: Binary Search in 2D Matrix

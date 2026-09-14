@@ -29,6 +29,9 @@ bool isPalindrome(const std::string& s) {
         right--;
     }
     return true;
+
+    // !isalnum mean what? in c++ 
+    // !isalnum(s[left]) means if s[left] is not alphanumeric then increment left
 }
 
 // 2. Reverse String in-place
@@ -192,11 +195,18 @@ int lengthOfLongestSubstring(const std::string& s) {
     int start = 0;
     
     for (int end = 0; end < s.length(); end++) {
-        if (lastIndex[s[end]] >= start) {
+        if (lastIndex[s[end]] >= start) { // this means last seen index of current char is greater than start index so it is duplicate so update start index to last seen index + 1  
+        // example   abcabcbb 
+        //lastIndex[s[end]] = -1 at first 
+        // 0th element a lastIndex[a] = -1   -1 >= 0 is false so start will be 0  
+        // 1th element b lastIndex[b] = -1   -1 >= 0 is false so start will be 0   
+        // 2th element c lastIndex[c] = -1   -1 >= 0 is false so start will be 0   
+        // 3th element a lastIndex[a] = 0    0 >= 0 is true so start will be lastIndex[a] + 1 = 0 + 1 = 1  
+        // lastIndex[a] = 0   
             start = lastIndex[s[end]] + 1;
         }
         lastIndex[s[end]] = end;
-        maxLen = std::max(maxLen, end - start + 1);
+        maxLen = std::max(maxLen, end - start + 1); // end - start + 1 is the length of the current substring without repeating characters 
     }
     return maxLen;
 }
