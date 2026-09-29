@@ -1,6 +1,10 @@
 /*
 QUESTION:-
-Given a linked list of size N. The task is to complete the function countNodesinLoop() that checks whether a given Linked List contains a loop or not and if the loop is present then return the count of nodes in a loop or else return 0. C is the position of the node to which the last node is connected. If it is 0 then no loop.
+Given a linked list of size N. The task is to complete the function
+countNodesinLoop() that checks whether a given Linked List contains a loop or
+not and if the loop is present then return the count of nodes in a loop or else
+return 0. C is the position of the node to which the last node is connected. If
+it is 0 then no loop.
 
 Example 1:
 Input: N = 10
@@ -27,40 +31,42 @@ is 2.
 
 /*
 APPROACH:
-To detect a loop in a linked list, we can use the Floyd's cycle-finding algorithm, also known as the "tortoise and hare" algorithm.
-Initialize two pointers, slow and fast, to the head of the linked list.
-Move the slow pointer one step at a time and the fast pointer two steps at a time.
-If the linked list has a loop, the fast pointer will eventually catch up to the slow pointer.
-In other words, if there is a loop, the two pointers will meet at some point.
-Once the two pointers meet, move one of the pointers back to the meeting point and start counting the number of nodes in the loop.
-Continue moving the pointer until it reaches the meeting point again, counting the nodes along the way.
+To detect a loop in a linked list, we can use the Floyd's cycle-finding
+algorithm, also known as the "tortoise and hare" algorithm. Initialize two
+pointers, slow and fast, to the head of the linked list. Move the slow pointer
+one step at a time and the fast pointer two steps at a time. If the linked list
+has a loop, the fast pointer will eventually catch up to the slow pointer. In
+other words, if there is a loop, the two pointers will meet at some point. Once
+the two pointers meet, move one of the pointers back to the meeting point and
+start counting the number of nodes in the loop. Continue moving the pointer
+until it reaches the meeting point again, counting the nodes along the way.
 Return the count of nodes in the loop.
-If the fast pointer reaches the end of the list (i.e., it becomes NULL or reaches a node with a NULL next pointer), then there is no loop in the linked list, and we can return 0.
+If the fast pointer reaches the end of the list (i.e., it becomes NULL or
+reaches a node with a NULL next pointer), then there is no loop in the linked
+list, and we can return 0.
 */
 
-int countNode(struct Node* slow, struct Node* fast) {
-    int cnt = 1;
+int countNode(struct Node *slow, struct Node *fast) {
+  int cnt = 1;
+  slow = slow->next;
+  while (fast != slow) {
     slow = slow->next;
-    while (fast != slow) {
-        slow = slow->next;
-        cnt++;
-    }
-    return cnt;
+    cnt++;
+  }
+  return cnt;
 }
 
-int countNodesinLoop(struct Node* head) {
-    struct Node* slow = head;
-    struct Node* fast = head;
-    while (fast && fast->next) {
-        slow = slow->next;
-        fast = fast->next->next;
-        if (fast == slow)
-            return countNode(slow, fast);
-    }
-    return 0;
+int countNodesinLoop(struct Node *head) {
+  struct Node *slow = head;
+  struct Node *fast = head;
+  while (fast && fast->next) {
+    slow = slow->next;
+    fast = fast->next->next;
+    if (fast == slow)
+      return countNode(slow, fast);
+  }
+  return 0;
 }
 
 // TIME COMPLEXITY: O(N)
 // SPACE COMPLEXITY: O(1)
-
-

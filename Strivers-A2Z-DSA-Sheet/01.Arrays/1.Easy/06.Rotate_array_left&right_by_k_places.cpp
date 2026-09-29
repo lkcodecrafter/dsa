@@ -36,20 +36,28 @@ To rotate the array k places to left follow below steps
 
 // CODE:-
 
+void reverse(int arr[], int start, int end) {
+  while (start < end) {
+    swap(arr[start], arr[end]);
+    start++;
+    end--;
+  }
+}
+
 // RIGHT ROATATE:-
 void rightRotate(int arr[], int n, int k) {
   k = k % n; // to keep k within the range
-  reverse(arr, arr + (n - k));
-  reverse(arr + (n - k), arr + n);
-  reverse(arr, arr + n);
+  reverse(arr, 0, n - k - 1);
+  reverse(arr, n - k, n - 1);
+  reverse(arr, 0, n - 1);
 }
 
 // LEFT ROATATE:-
 void leftRotate(int arr[], int n, int k) {
   k = k % n; // to keep k within the range
-  reverse(arr, arr + k);
-  reverse(arr + k, arr + n);
-  reverse(arr, arr + n);
+  reverse(arr, 0, k - 1);
+  reverse(arr, k, n - 1);
+  reverse(arr, 0, n - 1);
 }
 
 // TIME COMPLEXITY = O(N)

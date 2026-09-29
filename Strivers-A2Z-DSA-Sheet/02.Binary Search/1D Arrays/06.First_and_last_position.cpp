@@ -1,6 +1,7 @@
 /*
 QUESTION:
-Given an array of integers nums sorted in non-decreasing order, find the starting and ending position of a given target value.
+Given an array of integers nums sorted in non-decreasing order, find the
+starting and ending position of a given target value.
 
 If target is not found in the array, return [-1, -1].
 
@@ -12,21 +13,50 @@ Input: nums = [5,7,7,8,8,10], target = 8
 Output: [3,4]
 
 APPROACH:
-1. Use lower_bound to find the index of the first occurrence of the target in the array.
+1. Use lower_bound to find the index of the first occurrence of the target in
+the array.
 2. If the target is not found, return [-1, -1].
-3. Use upper_bound to find the index of the last occurrence of the target in the array.
+3. Use upper_bound to find the index of the last occurrence of the target in the
+array.
 4. Return the range [first, last-1] as the starting and ending positions.
 
 CODE:
 */
 
-vector<int> searchRange(vector<int>& nums, int target) {
-    int first = lower_bound(nums.begin(), nums.end(), target) - nums.begin();
-    // if the target is not found, return [-1, -1]
-    if (first == nums.size() || nums[first] != target)
-        return {-1, -1};
-    int last = upper_bound(nums.begin(), nums.end(), target) - nums.begin();
-    return {first, last-1};
+vector<int> searchRange(vector<int> &nums, int target) {
+  int first = lower_bound(nums.begin(), nums.end(), target) - nums.begin();
+  // if the target is not found, return [-1, -1]
+  if (first == nums.size() || nums[first] != target)
+    return {-1, -1};
+  int last = upper_bound(nums.begin(), nums.end(), target) - nums.begin();
+  return {first, last - 1};
+}
+
+vector<int> searchRange_withoutSTL(vector<int> &nums, int target) {
+  int first = -1, last = -1;
+  int low = 0, high = nums.size() - 1;
+  while (low <= high) {
+    int mid = low + (high - low) / 2;
+    if (nums[mid] >= target) {
+      high = mid - 1;
+    } else {
+      low = mid + 1;
+    }
+  }
+  first = low;
+  low = 0, high = nums.size() - 1;
+  while (low <= high) {
+    int mid = low + (high - low) / 2;
+    if (nums[mid] > target) {
+      high = mid - 1;
+    } else {
+      low = mid + 1;
+    }
+  }
+  last = high;
+  if (first == nums.size() || nums[first] != target)
+    return {-1, -1};
+  return {first, last};
 }
 
 // TIME COMPLEXITY: O(log n)

@@ -70,12 +70,12 @@ int height(TreeNode* root) {
     return 1 + std::max(height(root->left), height(root->right));
 }
 
-// 2. Diameter of Binary Tree
+// 2. Diameter of Binary Tree - what is diameter? longest path between any two nodes in the tree
 int getDiameter(TreeNode* root, int& d) {
     if (root == nullptr) return 0;
     int lh = getDiameter(root->left, d);
     int rh = getDiameter(root->right, d);
-    d = std::max(d, lh + rh);
+    d = std::max(d, lh + rh); // why d is passed by reference? so that we can update it throughout the recursion and when we return, the updated value is retained throughout the recursion.
     return 1 + std::max(lh, rh);
 }
 
